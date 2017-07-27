@@ -30,6 +30,9 @@ const EMAIL_PATTERN = /.+@.+/;
     :host {
       display: block;
     }
+    .swal2-modal {
+      font-family: "GT-Walsheim", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    }
     .slate {
       text-align: center;
       opacity: .7;
@@ -124,20 +127,20 @@ export class ContactComponent implements OnInit {
       .subscribe(
         () => {
           this.loading = false;
-          swal('Awesome', 'Email have been sent', 'success');
+          swal('Awesome', 'Email has been sent', 'success' );
           this._router.navigate(['/']);
         },
         err => {
-          //this.isCompleted = true;
+          // this.isCompleted = true;
           console.log(`error creating reservation ${err}`);
           this.loading = false;
           swal('Oops...', "Failed to send email", 'error');
         }
       );
 
-    //this.messages.push(message)
+    // this.messages.push(message)
     //  .then(x => console.log(message));
-    //this.contactForm.reset();
-    //this._router.navigate(['home']);
+    // this.contactForm.reset();
+    // this._router.navigate(['home']);
   }
 }
