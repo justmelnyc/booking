@@ -18,7 +18,7 @@ import { Router } from '@angular/router'
                 <p class="push">Latest work on Instagram</p>
                 <h2>Address</h2>
                 <!--<h3 class="subhead">Camus Restaurant</h3>-->
-                <h1 class="headline">1647 McCombs Road <br>& 174th Street.<br> Bronx, New York</h1>
+                <h1 class="headline">1647 Macombs Road <br>& 174th Street.<br> Bronx, New York</h1>
                 <a class="link" href="#">Google Map</a>
               </div>
             </div>

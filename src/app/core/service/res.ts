@@ -183,7 +183,6 @@ export class ReservationService {
       reservationFullDate: setHours(new Date(reservation.reservationDate), reservation.reservationTime)
     };
 
-
     const option: any =  {
       headers: {
         'Content-Type': 'Application/JSON',
@@ -193,6 +192,7 @@ export class ReservationService {
 
     return this.http.post(`${firebaseConfig.cloudFunctionsURL}/bookservice`, { reservation: compiledReservation, token: cardToken, amount: amount }, option);
   }
+
   firebaseUpdate(dataToSave) {
     this.slimLoadingBarService.start();
     const subject = new Subject();
@@ -220,16 +220,12 @@ export class ReservationService {
     this.db.database.ref(`reservations/${reservation.$key}/status`).set(newStatus);
   }
 
-
   kill(id) {
     this.slimLoadingBarService.start();
-    // console.log('im here now', id)
     const subject = new Subject();
     this.sdkDb.child(`reservations/${id}`)
       .remove();
     this.slimLoadingBarService.complete();
     return subject.asObservable();
-
   }
-
 }

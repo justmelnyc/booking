@@ -442,9 +442,9 @@ p {
 @media (min-width:768px) {
   .estimate-project__checkbox {
     display: block;
-    height: 230px;
+    //height: 230px;
     margin-bottom: 30px;
-    padding: 50px
+    //padding: 50px
   }
 }
 
@@ -526,7 +526,7 @@ p {
 
 @media (min-width:768px) {
   .estimate-project__checkbox__text {
-    margin: 45px 0 0;
+    margin: 10px 0 0;
     font-size: 14px
   }
 }

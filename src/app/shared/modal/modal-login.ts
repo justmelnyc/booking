@@ -154,7 +154,7 @@ import {ChangeDetectionStrategy, Component, ElementRef, ViewChild} from "@angula
           </h3>
         </div>
         <div class="overlay-content">
-          Sign in to The Lovely You to Book Reservations.
+          Sign in to The Lovely You, to Book Reservations. You can use an existing social media account, we will never post on you behalf.
         </div>
         <div class="overlay-actions buttonSet">
           <div class="buttonSet buttonSet--vertical">

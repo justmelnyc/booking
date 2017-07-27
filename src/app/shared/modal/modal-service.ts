@@ -21,8 +21,9 @@ import {ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, Vie
               <h3 class="u-contentSerifBold u-lineHeightTight  u-paddingTop20 u-paddingBottom20 u-marginBottom30 u-xs-fontSize24 u-fontSize40">
                 <span class="data" style="color: #353E4E; font-size: 50px">{{service.title}}</span>
               </h3>
+              <h1 class="headline">{{service.price | currency:'USD':true }}</h1>
               <!--<p style="padding-bottom: 1em" class="u-margin0 u-letterSpacingNormal">Does this look correct?</p>-->
-              <img [src]="service.img" style="width: 120px; height: 120px; opacity: .5; position: absolute; bottom: 2em">
+              <img [src]="service.img" style="width: 120px; height: 120px; opacity: .2; position: absolute; bottom: 2em">
             </div>
             <div class="u-relative u-flex1 u-sizeHalfWidth u-minHeight250 u-xs-minHeight100 u-xs-sizeFullWidth js-paymentForm">
               <div class="u-flexColumn u-sizeFullHeight u-backgroundWhite u-borderBox u-paddingLeft30 u-paddingRight30 u-paddingTop40 u-paddingBottom40 u-xs-padding20">

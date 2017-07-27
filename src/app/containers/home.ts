@@ -76,6 +76,15 @@ export class HomeComponent implements OnInit {
   @HostBinding('@routeFadeState') routeAnimation = false;
   services: Service[] = [
     {
+      'title': 'Shaping',
+      'price': 20,
+      'description': 'Brow shaping consist  of analyzing your actual brow shape and carefully removing unnecessary hair to begin your brow transformation.',
+      'type': 'Tinting',
+      'img': '/assets/needle.svg',
+      'question': 'Who should consider Tweezers?',
+      'answer': 'Aside from creating a more defined look look, tweezing is also a great option for those using any prescription medication or anyone who had a chemical peels, retinol or other products that thin the skin.',
+    },
+    {
       'title': 'Waxing',
       'price': 25,
       'description': 'Involves removing hair from the root along with dead skin cells resulting in an ultra smooth feel to the touch.',
@@ -84,23 +93,15 @@ export class HomeComponent implements OnInit {
       'question': 'Who should consider Waxing?',
       'answer': 'Great option for those too sensitive to tolerate thread or tweezers. Zinc oxide contains special barriers to shied and protect the skin.',
     },
+
     {
       'title': 'Tinting',
-      'price': 30,
+      'price': 45,
       'description': 'Involves adding pigment to the eyebrow to achieve an more defined look. this process can last anywhere from 2-3 weeks. ',
       'type': 'Shaping',
       'img': '/assets/drop.svg',
       'question': 'Who should consider Tinting?',
       'answer': 'Tinting specifically benefit those with light eyebrow hair. it adds definition to your brows creating a more bold and fuller look. With proper care can last up to 3 weeks consultation is needed prior ',
-    },
-    {
-      'title': 'Shaping',
-      'price': 35,
-      'description': 'Brow shaping consist  of analyzing your actual brow shape and carefully removing unnecessary hair to begin your brow transformation.',
-      'type': 'Tinting',
-      'img': '/assets/needle.svg',
-      'question': 'Who should consider Tweezers?',
-      'answer': 'Aside from creating a more defined look look, tweezing is also a great option for those using any prescription medication or anyone who had a chemical peels, retinol or other products that thin the skin.',
     }
   ];
   constructor(private router: Router,

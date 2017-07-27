@@ -68,7 +68,7 @@ export class ServiceFormComponent implements OnInit {
       'img': 'assets/wax.svg',
     },
     {
-      'price': 40,
+      'price': 45,
       'type': 'Tinting',
       'img': 'assets/drop.svg',
     }

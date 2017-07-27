@@ -30,7 +30,7 @@ import {ReservationService} from "../core/service/res";
 import {SlimLoadingBarService} from "ng2-slim-loading-bar";
 import {routeFadeStateTrigger} from "../app.animations";
 import swal from 'sweetalert2';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 // declare swal: any;
 // declare var swal:any;
 class CustomDateFormatter extends CalendarDateFormatter {
@@ -208,8 +208,6 @@ export class BookingComponent implements OnInit {
 
   onStep2Next(event) {
     console.log('Step2 - Next');
-    // this.stepNumber = 'Step Three';
-    // This is after selecting day
     this.reservationService.getReservationsForDay(this.data.reservationDate).subscribe(reservations => {
       this.bookedTimes = reservations.map(reservation => {
         return reservation.reservationTime;
@@ -219,11 +217,10 @@ export class BookingComponent implements OnInit {
 
   onStep3Next(event) {
     console.log('Step3 - Next');
-    // this.stepNumber = 'Step Four';
   }
+
   onStep4Next(event) {
     console.log('Step4 - Next');
-    // this.stepNumber = 'Step Four';
   }
   onComplete(event) {
     this.slimLoadingBarService.start();
@@ -236,8 +233,9 @@ export class BookingComponent implements OnInit {
     }, (status: number, response: any) => {
       if (status === 200) {
         console.log(`Success! Card token ${response.card.id}.`);
-        console.log('card  response', response);
-        _this.reservationService.bookUserReservation(_this.reservationForm.value, response.id, _this.data.service.price)
+        console.log('card response', response);
+
+        _this.reservationService.bookUserReservation(_this.reservationForm.value, response.id, _this.data.service.price )
           .subscribe(
             () => {
               _this.loading = false;
@@ -251,7 +249,9 @@ export class BookingComponent implements OnInit {
               // this.isCompleted = true;
               console.log(`error creating reservation ${err}`);
               _this.loading = false;
+
               swal('Oops...', err.message || err._body, 'error');
+
               _this.slimLoadingBarService.complete();
             }
           );

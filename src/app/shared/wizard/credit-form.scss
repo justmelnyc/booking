@@ -498,14 +498,12 @@ p {
 }
 
 .button:hover {
-  color: rgba(0, 0, 0, .6);
-  border-color: rgba(0, 0, 0, .44)
+  opacity: .8;
 }
 
 .button:active, .button:focus {
   outline: 0;
-  color: rgba(0, 0, 0, .8);
-  border-color: rgba(0, 0, 0, .6)
+  opacity: .8;
 }
 
 .button, .button .svgIcon {
@@ -800,4 +798,7 @@ button.invalid:hover {
 }
 #credit p, #credit label {
   font-family: "GT-Walsheim", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+#service-description h2 span {
+  color: #5FE6BE;
 }

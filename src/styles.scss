@@ -166,6 +166,11 @@ h3 {
   background-image: linear-gradient(to bottom right, #F7F7F7, #EAFBFF);
 }
 
+.bg-gradient-blend-pink {
+  background-color: #FFDEE9;
+  background-image: linear-gradient(0deg, #FFDEE9 12%, #B5FFFC 100%);
+}
+
 
 html {
   font-family: sans-serif;
@@ -438,6 +443,10 @@ body {
 
 .push {
   padding-bottom:2em;
+}
+
+.sweet {
+  font-family: "GT-Walsheim", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
 }
 
 

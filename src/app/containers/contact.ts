@@ -14,7 +14,7 @@ const EMAIL_PATTERN = /.+@.+/;
 @Component({
   selector: 'contact',
   template: `
-    <hero [type]="'top'" [background]="'assets/pink.png'"></hero>
+    <hero [type]="'top'" [background]="'assets/pink-min.jpg'"></hero>
     <section class="quote">
       <h3 class="text-center italic mb-half">"I've learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel.
         "</h3>
@@ -30,9 +30,7 @@ const EMAIL_PATTERN = /.+@.+/;
     :host {
       display: block;
     }
-    .swal2-modal {
-      font-family: "GT-Walsheim", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    }
+    
     .slate {
       text-align: center;
       opacity: .7;
@@ -40,6 +38,7 @@ const EMAIL_PATTERN = /.+@.+/;
     .quote h3.italic {
       font-family: "GT-Walsheim", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
       font-weight: 300;
+      padding: 2em;
     }
     @media (min-width: 44em) {
       .arrow-slider-block blockquote {
