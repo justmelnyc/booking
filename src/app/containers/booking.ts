@@ -51,7 +51,7 @@ type CalendarPeriod = 'day' | 'week' | 'month';
 @Component({
   selector: 'booking',
   template: `
-    <hero [background]="'assets/lite.jpg'"></hero>
+    <hero [background]="'assets/lite-min.jpg'"></hero>
     <!--<banner></banner>-->
 
     <div class="u-foreground homeContainer-content u-marginAuto u-clearfix u-sizeViewHeightMin100">
