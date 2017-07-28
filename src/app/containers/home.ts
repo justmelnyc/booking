@@ -78,11 +78,11 @@ export class HomeComponent implements OnInit {
     {
       'title': 'Shaping',
       'price': 20,
-      'description': 'Brow shaping consist  of analyzing your actual brow shape and carefully removing unnecessary hair to begin your brow transformation.',
+      'description': 'Brow shaping consist of analyzing your actual brow shape and carefully removing unnecessary hair to begin your brow transformation.',
       'type': 'Tinting',
       'img': '/assets/needle.svg',
       'question': 'Who should consider Tweezers?',
-      'answer': 'Aside from creating a more defined look look, tweezing is also a great option for those using any prescription medication or anyone who had a chemical peels, retinol or other products that thin the skin.',
+      'answer': 'Aside from creating a more defined look, tweezing is also a great option for those using any prescription medication or anyone who has had a chemical peels, retinol or other products that can cause thinning the skin.',
     },
     {
       'title': 'Waxing',
@@ -91,9 +91,8 @@ export class HomeComponent implements OnInit {
       'type': 'Waxing',
       'img': '/assets/wax.svg',
       'question': 'Who should consider Waxing?',
-      'answer': 'Great option for those too sensitive to tolerate thread or tweezers. Zinc oxide contains special barriers to shied and protect the skin.',
+      'answer': 'Great option for those who are too sensitive to tolerate thread or tweezers, using Satin Smooth Zinc oxide formula, which contains a special barriers to shield and protect the skin.',
     },
-
     {
       'title': 'Tinting',
       'price': 45,

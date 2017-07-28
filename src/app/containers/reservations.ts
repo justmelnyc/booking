@@ -9,46 +9,34 @@ import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'reservations',
-  template: `
-    <hero [background]="'assets/hero.png'">
-      <search (searchChanged)="searchValueChanged($event)"></search>
-    </hero>
-    <div class="spacer"></div>
-    <div class="spacer"></div>
-    <block>
-      <block-header [tag]="'This is where the header tag is'"></block-header>
-      <div>
-        <div class="btn-group">
-          Filter By :
-          <button data-toggle="dropdown"
-                  class="button button--small u-noUserSelect button--withChrome u-baseColor--buttonNormal button--withHover button--unblock js-unblockButton">
-            {{currentStatus()}} <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li><a (click)="updateStatus(-1)">All</a></li>
-            <li><a (click)="updateStatus(0)">Booked</a></li>
-            <li><a (click)="updateStatus(1)">Rescheduled</a></li>
-            <li><a (click)="updateStatus(2)">Completed</a></li>
-            <li><a (click)="updateStatus(3)">Cancelled</a></li>
-          </ul>
-        </div>
-      </div>
-      <item-list [items]="filtered || []" [showActionButton]="true" [showUserInfo]="true"></item-list>
-    </block>
-    <!--<ul>-->
-
-      <!--<li *ngFor=“let movie of movies | slice:0:5 as topMovies; index as i”>-->
-
-        <!--{{ topMovies.length - i }}: { movie.title }}-->
-
-      <!--</li>-->
-
-    <!--</ul>-->
-  `,
-  styles: [`
-    :host {
-      display: block;
-    }
-  `],
+  // template: `
+  //   <hero [background]="'assets/hero.png'">
+  //     <search (searchChanged)="searchValueChanged($event)"></search>
+  //   </hero>
+  //   <div class="spacer"></div>
+  //   <div class="spacer"></div>
+  //   <block>
+  //     <block-header [tag]="'This is where the header tag is'"></block-header>
+  //     <div>
+  //       <div class="btn-group">
+  //         Filter By :
+  //         <button data-toggle="dropdown"
+  //                 class="button button--small u-noUserSelect button--withChrome u-baseColor--buttonNormal button--withHover button--unblock js-unblockButton">
+  //           {{currentStatus()}} <span class="caret"></span></button>
+  //         <ul class="dropdown-menu">
+  //           <li><a (click)="updateStatus(-1)">All</a></li>
+  //           <li><a (click)="updateStatus(0)">Booked</a></li>
+  //           <li><a (click)="updateStatus(1)">Rescheduled</a></li>
+  //           <li><a (click)="updateStatus(2)">Completed</a></li>
+  //           <li><a (click)="updateStatus(3)">Cancelled</a></li>
+  //         </ul>
+  //       </div>
+  //     </div>
+  //     <item-list [items]="filtered || []" [showActionButton]="true" [showUserInfo]="true"></item-list>
+  //   </block>
+  // `,
+  templateUrl: 'reservations.html',
+  styleUrls: ['reservations.scss'],
   animations: [
     routeFadeStateTrigger
   ]
@@ -78,14 +66,14 @@ export class ReservationsComponent implements OnInit {
   }
 
   filterReservations() {
-    let filtered = [];
-    let searchLowercase = this.searchString.toLocaleLowerCase();
+    const filtered = [];
+    const searchLowercase = this.searchString.toLocaleLowerCase();
     if (this.reservations && this.reservations.length > 0) {
         this.reservations.forEach(reservation => {
-          if ((this.status == -1 || reservation.reservation.status == this.status) && (this.searchString == '' || reservation.reservation.client.email.toLocaleLowerCase().includes(searchLowercase) || reservation.reservation.client.name.toLocaleLowerCase().includes(searchLowercase))) {
+          if ((this.status === -1 || reservation.reservation.status === this.status) && (this.searchString === '' || reservation.reservation.client.email.toLocaleLowerCase().includes(searchLowercase) || reservation.reservation.client.name.toLocaleLowerCase().includes(searchLowercase))) {
             filtered.push(reservation);
           }
-        })
+        });
         this.filtered = filtered;
     }
   }

@@ -3,12 +3,9 @@ import {Component, Input, OnInit} from "@angular/core";
 @Component({
   selector: 'item-list',
   template: `
-    <div *ngFor="let item of items">
-      <!--<p>here {{item | json}}</p>-->
-      <item [reservation]="item" [showActionButton]="showActionButton" [showUserInfo]="showUserInfo"></item>
+    <div *ngFor="let item of items; index as i; odd as isOdd; even as isEven">
+      <item [isOdd]="isOdd" [isEven]="isEven" [reservation]="item" [showActionButton]="showActionButton" [showUserInfo]="showUserInfo"></item>
     </div>
-
-    <!--<pre>{{items | json }}</pre>-->
   `,
   styles: [`
     body {

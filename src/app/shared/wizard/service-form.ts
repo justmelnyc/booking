@@ -58,6 +58,16 @@ export class ServiceFormComponent implements OnInit {
   // @Input() tag;
   services: any = [
     {
+      'price': 7,
+      'type': 'Upper Lip',
+      'img': 'assets/lips.svg',
+    },
+    {
+      'price': 10,
+      'type': 'Under Arms',
+      'img': 'assets/arm.svg',
+    },
+    {
       'price': 20,
       'type': 'Threading',
       'img': 'assets/needle.svg',
@@ -71,6 +81,11 @@ export class ServiceFormComponent implements OnInit {
       'price': 45,
       'type': 'Tinting',
       'img': 'assets/drop.svg',
+    },
+    {
+      'price': 55,
+      'type': 'Full Face',
+      'img': 'assets/face.svg',
     }
   ];
 

@@ -17,7 +17,7 @@ import {Component, Input} from "@angular/core";
       
       <div class="discover__col">
         <div class="testimonial">
-          <p>I struggle with eyebrow growth. I have been them grow since my maternity photoshoot nearly a year ago. As you can see from the top photo they didn't grow much.
+          <p>I struggle with eyebrow growth. I have been allowing them grow for almost a year. As you can see from the top photo they didn't grow much.
             However The Lovely You managed to make my eyebrows look better than ever before. So happy I took this step. Thank you for making my time there feel so welcoming and for bringing my eyebrows back to life. You are AMAZING at what you do. Thank you. Thank you Thank you.</p>
         </div>
         <!--<div class="avatar">-->
@@ -30,7 +30,7 @@ import {Component, Input} from "@angular/core";
      
       <div class="discover__col">
         <div class="testimonial">
-          <p>Can you just take a second to notice my brows, I have't let anyone touch my brows in more than a year and a half because they never got it right but then I came across The Lovely You and I thought "yeah I have to let her do my brows" and I was amazed . SO SO HAPPY! ladies check her out! I promise you won't be disappointed. She's such a sweet heart and doesn't rush her work!</p>
+          <p>Can you just take a second to notice my brows, I have't let anyone touch my brows in more than a year and a half because they never got it right but then I came across The Lovely You and I thought "yeah I have to let her do my brows" and I was amazed. SO SO HAPPY! ladies check her out! I promise you won't be disappointed. She's such a sweet heart and doesn't rush her work!</p>
         </div>
         <!--<div class="avatar">-->
           <!--<img src="/assets/t3.png" class="avatar-image avatar-image&#45;&#45;icon" alt="name">-->

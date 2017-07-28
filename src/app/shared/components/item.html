@@ -29,8 +29,10 @@
         <div class="u-marginLeft20 u-floatRight" *ngIf="showActionButton">
           <span class="followState js-followState buttonSet-inner">
             <div class="btn-group">
-              <button data-toggle="dropdown" class="button button--small u-noUserSelect button--withChrome u-baseColor--buttonNormal button--withHover button--unblock js-unblockButton">{{currentStatus()}} <span class="caret"></span></button>
-              <ul class="dropdown-menu">
+              <button data-toggle="dropdown" class="button button--small u-noUserSelect button--withChrome u-baseColor--buttonNormal button--withHover button--unblock">{{currentStatus()}}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" style="left: -40px">
                 <li><a (click)="updateStatus(0)">Booked</a></li>
                 <li><a (click)="updateStatus(1)">Rescheduled</a></li>
                 <li><a (click)="updateStatus(2)">Completed</a></li>
@@ -43,5 +45,4 @@
       </div>
     </div>
   </div>
-  <!--<pre>{{reservation.reservation.key | json}}</pre>-->
 </div>

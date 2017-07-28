@@ -296,7 +296,7 @@ p {
     display: block;
     height: 230px;
     margin-bottom: 30px;
-    padding: 50px
+    padding: 50px 10px;
   }
 }
 
@@ -440,4 +440,15 @@ p {
   }
 
 
+}
+
+
+
+@media (min-width: 992px) {
+  .estimate-project__question-row:nth-child(2) {
+    display: block;
+  }
+}
+.col-sm-4 {
+  padding-bottom: 30px;
 }
