@@ -14,7 +14,7 @@ import { Router } from '@angular/router'
           <div class="u-flex1 u-sizeHalfWidth u-borderBox u-padding40 u-xs-padding20 u-xs-marginBottom20 u-xs-sizeFullWidth">
             <div class="inner">
               <div id="service-description">
-                <h2><a class="tag" href="#">@thelovelyou</a></h2>
+                <h2><a class="tag" target="_blank" href="https://www.instagram.com/thelovelyyou/">@thelovelyou</a></h2>
                 <p class="push">Latest work on Instagram</p>
                 <h2>Address</h2>
                 <!--<h3 class="subhead">Camus Restaurant</h3>-->

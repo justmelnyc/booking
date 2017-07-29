@@ -15,6 +15,9 @@ import {
   isSameMonth,
   isSunday,
   isWeekend,
+  isTuesday,
+  isWednesday,
+  isThursday,
   startOfDay,
   startOfMonth,
   startOfWeek,
@@ -181,7 +184,9 @@ export class BookingComponent implements OnInit {
               private slimLoadingBarService: SlimLoadingBarService,
               private store: Store<RootStore.AppState>) {
     this.dayModifier = function (day: Date): string {
-      if (!this.dateIsValid(day) || isSunday(day)) {
+      if (!this.dateIsValid(day) || isSunday(day) || isTuesday(day) ||
+          isWednesday(day) ||
+          isThursday(day)) {
         // day.cssClass = 'cal-disabled';
         return 'disabled';
       }

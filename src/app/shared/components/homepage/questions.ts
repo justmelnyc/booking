@@ -20,8 +20,8 @@ import {Component, Input} from "@angular/core";
       <div class="discover__row">
         <div class="discover__col">
           <div class="article-card">
-            <h3>How do I know is I should get the extra strength formula or the sensitive skin version?</h3>
-            <p>The easiest way is to sample your own skin, by dabbing a bit of each and waiting at least 12 hours to check for a reaction on the spot of the application.</p>
+            <h3>How can I view my upcoming Appointment?</h3>
+            <p>The easiest way to view your appointment is to sign in to your account, your appointments are listed in your profile page.</p>
           </div>
         </div>
         <div class="discover__col">
