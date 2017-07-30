@@ -14,7 +14,7 @@ const EMAIL_PATTERN = /.+@.+/;
 @Component({
   selector: 'contact',
   template: `
-    <hero [type]="'top'" [background]="'assets/pink-min.jpg'"></hero>
+    <hero [background]="'assets/blue.jpg'"></hero>
     <section class="quote">
       <h3 class="text-center italic mb-half">"I've learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel.
         "</h3>

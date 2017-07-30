@@ -27,8 +27,8 @@ import {Component} from "@angular/core";
           <a target="_blank" href="https://www.facebook.com/yulisa.guzman.96558" class="button button--chromeless u-baseColor--buttonNormal u-marginLeft15 u-lineHeight35 u-xs-block u-xs-marginLeft0"
           >Facebook</a>
         </div>
-        <div class="middle">
-          <logo [style.fill]="'#404040'" style="padding-left: 3em"></logo>
+        <div class="middle" style="cursor: pointer">
+          <logo routerLink="/" [style.fill]="'#404040'" style="padding-left: 3em"></logo>
           <div class="copy_text">Copyright 2017 The Lovely You. <br />All Rights Reserved</div>
         </div>
       </div>

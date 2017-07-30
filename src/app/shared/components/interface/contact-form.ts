@@ -19,7 +19,7 @@ import { Router } from '@angular/router'
                 <h2>Address</h2>
                 <!--<h3 class="subhead">Camus Restaurant</h3>-->
                 <h1 class="headline">1647 Macombs Road <br>& 174th Street.<br> Bronx, New York</h1>
-                <a class="link" href="#">Google Map</a>
+                <a target="_blank" class="link" href="https://www.google.com/maps/place/1647+Macombs+Rd,+Bronx,+NY+10453/@40.8474661,-73.9188228,17z/data=!4m13!1m7!3m6!1s0x89c2f4144f8bfcc5:0x7d686def02423738!2s1647+Macombs+Rd,+Bronx,+NY+10453!3b1!8m2!3d40.8474661!4d-73.9166341!3m4!1s0x89c2f4144f8bfcc5:0x7d686def02423738!8m2!3d40.8474661!4d-73.9166341">Google Map</a>
               </div>
             </div>
             <!--<h3 class="u-contentSerifBold u-lineHeightTight u-textColorWhite u-borderTopGreen u-borderBottomGreen u-paddingTop20 u-paddingBottom20 u-marginBottom30 u-xs-fontSize24 u-fontSize40">-->

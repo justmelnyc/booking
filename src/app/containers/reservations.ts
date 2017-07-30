@@ -9,33 +9,40 @@ import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'reservations',
-  // template: `
-  //   <hero [background]="'assets/hero.png'">
-  //     <search (searchChanged)="searchValueChanged($event)"></search>
-  //   </hero>
-  //   <div class="spacer"></div>
-  //   <div class="spacer"></div>
-  //   <block>
-  //     <block-header [tag]="'This is where the header tag is'"></block-header>
-  //     <div>
-  //       <div class="btn-group">
-  //         Filter By :
-  //         <button data-toggle="dropdown"
-  //                 class="button button--small u-noUserSelect button--withChrome u-baseColor--buttonNormal button--withHover button--unblock js-unblockButton">
-  //           {{currentStatus()}} <span class="caret"></span></button>
-  //         <ul class="dropdown-menu">
-  //           <li><a (click)="updateStatus(-1)">All</a></li>
-  //           <li><a (click)="updateStatus(0)">Booked</a></li>
-  //           <li><a (click)="updateStatus(1)">Rescheduled</a></li>
-  //           <li><a (click)="updateStatus(2)">Completed</a></li>
-  //           <li><a (click)="updateStatus(3)">Cancelled</a></li>
-  //         </ul>
-  //       </div>
-  //     </div>
-  //     <item-list [items]="filtered || []" [showActionButton]="true" [showUserInfo]="true"></item-list>
-  //   </block>
-  // `,
-  templateUrl: 'reservations.html',
+  template: `
+    <hero [background]="'assets/blue.jpg'">
+      <search (searchChanged)="searchValueChanged($event)"></search>
+    </hero>
+    <div class="streamItem streamItem--section js-streamItem" style="padding-top: 3em">
+      <section class="u-borderBox u-maxWidth1000 u-marginAuto u-marginTop30 u-marginBottom40 u-clearfix u-sm-paddingLeft20 u-sm-paddingRight20 u-xs-marginTop15">
+        <nav class="u-flex heading heading--borderedTop u-textAlignCenter" style="padding-bottom: 2em">
+          <ul class="heading-tabs">
+            <li class="heading-tabsItem u-inlineBlock"
+                [ngClass]="{'is-active': this.status === -1}">
+              <a (click)="updateStatus(-1)">All</a>
+            </li>
+            <li class="heading-tabsItem u-inlineBlock"
+                [ngClass]="{'is-active': this.status === 0}">
+              <a (click)="updateStatus(0)">Booked</a>
+            </li>
+            <li class="heading-tabsItem u-inlineBlock"
+                [ngClass]="{'is-active': this.status === 1}">
+              <a (click)="updateStatus(1)">Rescheduled</a>
+            </li>
+            <li class="heading-tabsItem u-inlineBlock"
+                [ngClass]="{'is-active': this.status === 2}">
+              <a (click)="updateStatus(2)">Completed</a>
+            </li>
+            <li class="heading-tabsItem u-inlineBlock"
+                [ngClass]="{'is-active': this.status === 3}">
+              <a (click)="updateStatus(3)">Cancelled</a>
+            </li>
+          </ul>
+        </nav>
+        <item-list [items]="filtered || []" [showActionButton]="true" [showUserInfo]="true"></item-list>
+      </section>
+    </div>
+  `,
   styleUrls: ['reservations.scss'],
   animations: [
     routeFadeStateTrigger
