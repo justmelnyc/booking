@@ -36,6 +36,14 @@ import {Component, Input, OnInit} from "@angular/core";
       margin: auto;
       /*opacity: .8;*/
     }
+
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 2.5em;
+        margin: 1.5em auto 1em;
+        width: 350px;
+      }
+    }
   `]
 })
 export class HeroTextComponent implements OnInit {
