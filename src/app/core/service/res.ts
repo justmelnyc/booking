@@ -118,7 +118,7 @@ export class ReservationService {
             reservation
           };
         });
-      })
+      });
   }
   filteredReservations(day) {
     return this.db.list('reservations', {
