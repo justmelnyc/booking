@@ -8,7 +8,7 @@ import {Service} from "../core/model/index";
 @Component({
   selector: 'home',
   template: `
-    <hero [type]="'jumbotron'" [background]="'assets/her.jpg'">
+    <hero [type]="'jumbotron'" [background]="'assets/hero.png'">
       <hero-text
         [heading]="'The eyes are windows to the soul'"
         [subheading]="'Your gaze is the soul shining back into the world..'">
