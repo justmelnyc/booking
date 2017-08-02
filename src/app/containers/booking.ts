@@ -34,6 +34,7 @@ import {SlimLoadingBarService} from "ng2-slim-loading-bar";
 import {routeFadeStateTrigger} from "../app.animations";
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import * as _ from 'lodash';
 // declare swal: any;
 // declare var swal:any;
 class CustomDateFormatter extends CalendarDateFormatter {
@@ -95,7 +96,7 @@ type CalendarPeriod = 'day' | 'week' | 'month';
                 [stepTagline]="'What time would you like'"
                 [stepHeading]="'Sessions are an hour long'"
                 (onNext)="onStep3Next($event)">
-                <time-form formControlName="reservationTime" [times]='times | async' [bookedTimes]='bookedTimes'></time-form>
+                <time-form formControlName="reservationTime" [times]='times | async' [bookedTimes]='bookedTimesNew'></time-form>
               </wizard-step>
               <wizard-step
                 [isValid]="this.data && this.data.creditDetail && this.data.creditDetail.valid"
@@ -160,6 +161,9 @@ export class BookingComponent implements OnInit {
   loading = false;
   times;
   bookedTimes = [];
+
+  bookedTimesNew = [];
+
   user;
   data: any = {};
 
@@ -184,9 +188,7 @@ export class BookingComponent implements OnInit {
               private slimLoadingBarService: SlimLoadingBarService,
               private store: Store<RootStore.AppState>) {
     this.dayModifier = function (day: Date): string {
-      if (!this.dateIsValid(day) || isSunday(day) || isTuesday(day) ||
-          isWednesday(day) ||
-          isThursday(day)) {
+      if (!this.dateIsValid(day) || isSunday(day)) {
         // day.cssClass = 'cal-disabled';
         return 'disabled';
       }
@@ -203,7 +205,7 @@ export class BookingComponent implements OnInit {
   onStep1Next(event) {
     console.log(this.data, 'Step1 - Next');
     // this.stepNumber = 'Step Two';
-    // console.log("HALA ISIVISIBLE", swal.isVisible());
+    // console.log("Hello", swal.isVisible());
     // swal.showLoading();
     // if(swal.isVisible()) { // instant regret
     //  swal.close();
@@ -212,11 +214,19 @@ export class BookingComponent implements OnInit {
   }
 
   onStep2Next(event) {
-    console.log('Step2 - Next');
     this.reservationService.getReservationsForDay(this.data.reservationDate).subscribe(reservations => {
       this.bookedTimes = reservations.map(reservation => {
         return reservation.reservationTime;
       });
+      if (this.data.reservationDate) {
+        if (isTuesday(this.data.reservationDate) || isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate)) {
+          this.bookedTimesNew = _.concat(this.bookedTimes, [10, 11, 12, 13, 14, 15, 16]);
+          console.log(this.bookedTimesNew);
+        } else {
+          this.bookedTimesNew = _.concat(this.bookedTimes, []);
+          console.log('other');
+        }
+      }
     });
   }
 

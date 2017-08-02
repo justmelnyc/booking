@@ -1,6 +1,7 @@
 import {Component, EventEmitter, forwardRef, HostBinding, Input, OnInit, Output} from '@angular/core'
 import {FormGroup, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {routeFadeStateTrigger} from "../../app.animations";
+import {isBefore, getHours} from 'date-fns';
 
 const TIME_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -91,7 +92,8 @@ export class TimeFormComponent implements OnInit {
     this.value = value || 0;
   }
   isBooked(time) {
-    if (this.bookedTimes.indexOf(time) > -1) {
+    const now = getHours(Date.now());
+    if (this.bookedTimes.indexOf(time) > -1 || isBefore(time, now)) {
       return true;
     }
     return false;
