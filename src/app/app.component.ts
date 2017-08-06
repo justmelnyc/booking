@@ -179,6 +179,6 @@ export class AppComponent implements OnInit {
   }
   signOut(): void {
     this.store.dispatch(this.authActions.logOutUser());
-    this.router.navigate('[/]');
+    this.router.navigate(['/']);
   }
 }
