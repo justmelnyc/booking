@@ -7,6 +7,7 @@ import {AuthActions} from "./store/actions/index";
 import {PopoverNotificationsComponent, PopoverMenuComponent, PopoverService} from "./shared/popover/index";
 import * as RootStore from './store';
 import {User} from "./core/model/index";
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-root',
@@ -140,6 +141,7 @@ export class AppComponent implements OnInit {
 
   constructor(private store: Store<RootStore.AppState>,
               private authActions: AuthActions,
+              private router: Router,
               private modalService: ModalService,
               private popoverService: PopoverService) { }
 
@@ -177,5 +179,6 @@ export class AppComponent implements OnInit {
   }
   signOut(): void {
     this.store.dispatch(this.authActions.logOutUser());
+    this.router.navigate('[/]');
   }
 }
