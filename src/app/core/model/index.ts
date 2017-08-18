@@ -1,5 +1,5 @@
 export * from './user';
-export * from './reservation';
+export * from './res';
 export * from './message';
 export * from './login';
 export * from './status';

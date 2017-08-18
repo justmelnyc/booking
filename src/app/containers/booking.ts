@@ -32,11 +32,11 @@ import {ReservationsActions} from "../store/actions/res";
 import {ReservationService} from "../core/service/res";
 import {SlimLoadingBarService} from "ng2-slim-loading-bar";
 import {routeFadeStateTrigger} from "../app.animations";
-import swal from 'sweetalert2';
+// import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 // declare swal: any;
-// declare var swal:any;
+declare var swal:any;
 class CustomDateFormatter extends CalendarDateFormatter {
 
   public monthViewColumnHeader({date, locale}: DateFormatterParams): string {
@@ -198,7 +198,7 @@ export class BookingComponent implements OnInit {
   }
 
   setDay() {
-    console.log('today is', this.viewDate);
+    // console.log('today is', this.viewDate);
     this.reservationService.updateDay(this.viewDate);
   }
 
@@ -213,29 +213,51 @@ export class BookingComponent implements OnInit {
     // sweetAlert.swal.showLoading();
   }
 
+  // onStep2Next(event) {
+  //   this.reservationService.getReservationsForDay(this.data.reservationDate).subscribe(reservations => {
+  //     this.bookedTimes = reservations.map(reservation => {
+  //       return reservation.reservationTime;
+  //     });
+  //     // if (this.data.reservationDate) {
+  //     //   if (isTuesday(this.data.reservationDate) || isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate)) {
+  //     //     this.bookedTimesNew = _.concat(this.bookedTimes, [10, 11, 12, 13, 14, 15, 16]);
+  //     //     console.log(this.bookedTimesNew);
+  //     //   } else {
+  //     //     this.bookedTimesNew = _.concat(this.bookedTimes, []);
+  //     //     console.log(this.bookedTimesNew);
+  //     //   }
+  //     // }
+  //   });
+  // }
+
   onStep2Next(event) {
+    console.log('Step2 - Next');
+    // this.stepNumber = 'Step Three';
+    // This is after selecting day
     this.reservationService.getReservationsForDay(this.data.reservationDate).subscribe(reservations => {
+
       this.bookedTimes = reservations.map(reservation => {
+        // console.log(reservation);
         return reservation.reservationTime;
       });
       if (this.data.reservationDate) {
-        if (isTuesday(this.data.reservationDate) || isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate)) {
-          this.bookedTimesNew = _.concat(this.bookedTimes, [10, 11, 12, 13, 14, 15, 16]);
-          console.log(this.bookedTimesNew);
-        } else {
-          this.bookedTimesNew = _.concat(this.bookedTimes, []);
-          console.log('other');
-        }
-      }
+            if (isTuesday(this.data.reservationDate) || isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate)) {
+              this.bookedTimesNew = _.concat(this.bookedTimes, [10, 11, 12, 13, 14, 15, 16]);
+              console.log(this.bookedTimesNew);
+            } else {
+              this.bookedTimesNew = _.concat(this.bookedTimes, []);
+              console.log(this.bookedTimesNew);
+            }
+          }
     });
   }
 
   onStep3Next(event) {
-    console.log('Step3 - Next');
+    // console.log('Step3 - Next');
   }
 
   onStep4Next(event) {
-    console.log('Step4 - Next');
+    // console.log('Step4 - Next');
   }
   onComplete(event) {
     this.slimLoadingBarService.start();
@@ -292,7 +314,8 @@ export class BookingComponent implements OnInit {
     this.slimLoadingBarService.start();
     this.times = this.reservationService.getAllSlots();
     this.filtered = this.getThisDay(this.viewDate);
-    console.log('filtered is', this.filtered);
+    // console.log('filtered is', this.filtered);
+    console.log('times', this.times);
 
     this.user = this.store.select(state => state.authState.currentUser);
 

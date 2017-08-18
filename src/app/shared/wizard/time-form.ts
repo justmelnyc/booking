@@ -114,6 +114,7 @@ export class TimeFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('wow', this.times);
 
   }
 }

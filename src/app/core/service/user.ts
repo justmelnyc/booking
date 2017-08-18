@@ -19,7 +19,7 @@ export class UserService {
   constructor(public af: FirebaseApp, private http: Http,
               private store: Store<RootStore.AppState>,
               private usersActions: UserActions,
-            private db: AngularFireDatabase) { }
+              private db: AngularFireDatabase) { }
 
   getUsers() {
     console.log("Get USERS called")
@@ -28,7 +28,7 @@ export class UserService {
   getSingleUser(userId) {
     console.log("Get USERS called")
 
-    let userRef = this.db.object("users/" + userId);
+    const userRef = this.db.object("users/" + userId);
     return userRef;
   }
 

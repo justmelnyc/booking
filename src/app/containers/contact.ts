@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
 import {Message} from "../core/model/message";
-import swal from "sweetalert2";
+import * as swal from "sweetalert2";
 import {UserService} from "../core/service/user";
 
 const EMAIL_PATTERN = /.+@.+/;

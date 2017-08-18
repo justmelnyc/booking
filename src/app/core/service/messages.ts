@@ -5,7 +5,8 @@ import {Store} from "@ngrx/store";
 import * as RootStore from "../../store";
 import {MessagesActions} from "../../store/actions/index";
 import {Message} from "../model/index";
-import {Observable, Subject} from "rxjs";
+import {Observable} from 'rxjs/observable';
+import {Subject} from 'rxjs/subject';
 import * as firebase from 'firebase';
 
 
@@ -13,14 +14,14 @@ const BASE_URL = '/messages/';
 @Injectable()
 export class MessagesService {
 
-  messages: Observable<Message[]>
+  messages: Observable<Message[]>;
   rootRef = firebase.database().ref();
 
   constructor(public af: FirebaseApp,
               private db: AngularFireDatabase,
               private messagesActions: MessagesActions,
               private store: Store<RootStore.AppState>) {
-    this.messages = store.select('messages')
+              this.messages = store.select('messages');
 
   }
 
@@ -29,7 +30,7 @@ export class MessagesService {
       .subscribe(action => this.store.dispatch(this.messagesActions.loadMessagesSuccess(action)));
   }
 
-  getMessages(){
+  getMessages() {
     return this.db.list('messages')
       .map((messages: Message[]) => {
         return messages.map((message: Message) => {
@@ -38,9 +39,9 @@ export class MessagesService {
             header: message.id,
             available: message.timestamp,
             message
-          }
-        })
-      })
+          };
+        });
+      });
   }
 
   // getAllReservations() {
@@ -66,7 +67,7 @@ export class MessagesService {
 
   getTodos() {
     const todos = [{id: 1, title: "Learn ngrx/store", completed: false}, {id: 2, title: "Learn ngrx/effects", completed: false}]
-    return Observable.timer(1000).mapTo(todos)
+    return Observable.timer(1000).mapTo(todos);
   }
 
   createMessage(message) {
@@ -75,9 +76,9 @@ export class MessagesService {
 
     const today = new Date().toISOString();
 
-    const compiledMessage:Message = Object
-      .assign({}, {content: message.message},{read: false}, {uid:message.uid}, {id:key}, {timestamp:today});
-    console.log('in service',compiledMessage)
+    const compiledMessage: Message = Object
+      .assign({}, {content: message.message}, {read: false}, {uid: message.uid}, {id: key}, {timestamp: today});
+    console.log('in service', compiledMessage);
 
     const createMessageJoin = {};
 
@@ -86,7 +87,7 @@ export class MessagesService {
     createMessageJoin[`users/${message.uid}/messages/${key}`] = true;
 
     return this.db.object(`/`).update(createMessageJoin)
-      .then(message => (this.messagesActions.addMessageSuccess(message)))
+      .then( messageCompiled => (this.messagesActions.addMessageSuccess(messageCompiled)))
       .then(action => this.store.dispatch(action));
   }
 
@@ -97,9 +98,9 @@ export class MessagesService {
 
     const today = new Date().toISOString();
 
-    const compiledMessage:Message = Object
-      .assign({}, {content: message.message},{read: false}, {uid:message.uid}, {id:key}, {timestamp:today});
-    console.log('in service',compiledMessage)
+    const compiledMessage: Message = Object
+      .assign({}, {content: message.message}, {read: false}, {uid: message.uid}, {id: key}, {timestamp: today});
+    console.log('in service', compiledMessage);
 
     const createMessageJoin = {};
 
@@ -107,30 +108,30 @@ export class MessagesService {
     createMessageJoin[`messagesFromClients/${message.uid}/${key}`] = true;
     createMessageJoin[`users/${message.uid}/messages/${key}`] = true;
 
-    return Observable.of(this.db.object(`/`).update(createMessageJoin))
+    return Observable.of(this.db.object(`/`).update(createMessageJoin));
 
   }
 
 
-  sendUserMessage(message) {
-    const key = this.rootRef.child('/messages').push().key;
-
-    const today = new Date().toISOString();
-
-    const compiledMessage:Message = Object
-      .assign({}, {content: message.message},{read: false}, {uid:message.uid}, {id:key}, {timestamp:today});
-    console.log('in service',compiledMessage)
-
-    const createMessageJoin = {};
-
-    createMessageJoin[`messages/${key}`] = compiledMessage;
-    createMessageJoin[`messagesFromClients/${message.uid}/${key}`] = true;
-    createMessageJoin[`users/${message.uid}/messages/${key}`] = true;
-
-    return this.db.object(`/`).update(createMessageJoin)
-      .then(message => this.messagesActions.addMessageSuccess(message))
-      .catch(error => Observable.of(this.messagesActions.addMessageFailure(error.message)))
-  }
+  // sendUserMessage(message) {
+  //   const key = this.rootRef.child('/messages').push().key;
+  //
+  //   const today = new Date().toISOString();
+  //
+  //   const compiledMessage: Message = Object
+  //     .assign({}, {content: message.message},{read: false}, {uid: message.uid}, {id: key}, {timestamp: today});
+  //   console.log('in service', compiledMessage)
+  //
+  //   const createMessageJoin = {};
+  //
+  //   createMessageJoin[`messages/${key}`] = compiledMessage;
+  //   createMessageJoin[`messagesFromClients/${message.uid}/${key}`] = true;
+  //   createMessageJoin[`users/${message.uid}/messages/${key}`] = true;
+  //
+  //   return this.db.object(`/`).update(createMessageJoin)
+  //     .then( message => this.messagesActions.addMessageSuccess(message))
+  //     .catch(error => Observable.of(this.messagesActions.addMessageFailure(error.message)));
+  // }
 
   deleteMessage(message: Message) {
     this.db.list(`${BASE_URL}${message.id}`)
