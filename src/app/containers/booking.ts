@@ -18,12 +18,16 @@ import {
   isTuesday,
   isWednesday,
   isThursday,
+  isFriday,
   startOfDay,
   startOfMonth,
   startOfWeek,
   subDays,
   subMonths,
-  subWeeks
+  subWeeks,
+  isSaturday,
+  isWithinRange,
+  isDate
 } from "date-fns";
 import * as RootStore from "../store";
 import {Store} from "@ngrx/store";
@@ -181,6 +185,12 @@ export class BookingComponent implements OnInit {
 
   filtered;
 
+  friday25 = new Date(2017, 7, 25);
+  saturday26 = new Date(2017, 7, 26);
+
+  startDate = new Date(2017, 8, 11);
+  endDate = new Date(2017, 9, 3);
+
   constructor(private reservationsActions: ReservationsActions,
               private fb: FormBuilder,
               private _router: Router,
@@ -188,7 +198,7 @@ export class BookingComponent implements OnInit {
               private slimLoadingBarService: SlimLoadingBarService,
               private store: Store<RootStore.AppState>) {
     this.dayModifier = function (day: Date): string {
-      if (!this.dateIsValid(day) || isSunday(day)) {
+      if (!this.dateIsValid(day) || isSunday(day) || isWithinRange(day, this.friday25, this.saturday26) || isWithinRange(day, this.startDate, this.endDate) ) {
         // day.cssClass = 'cal-disabled';
         return 'disabled';
       }

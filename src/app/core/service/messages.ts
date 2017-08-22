@@ -5,7 +5,7 @@ import {Store} from "@ngrx/store";
 import * as RootStore from "../../store";
 import {MessagesActions} from "../../store/actions/index";
 import {Message} from "../model/index";
-import {Observable} from 'rxjs/observable';
+import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/subject';
 import * as firebase from 'firebase';
 
