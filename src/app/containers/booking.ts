@@ -68,7 +68,6 @@ type CalendarPeriod = 'day' | 'week' | 'month';
           <loadingspinner *ngIf="loading"></loadingspinner>
           <div class="wizard">
             <form-wizard [formGroup]="reservationForm" (onStepChanged)="onStepChanged($event)">
-              {{ thurAtFour | date }} {{ friAtTen | date }}
               <wizard-step
                 [isValid]="!reservationForm.controls['service'].untouched"
                 [title]=" data?.service?.type ||'Pick Service'"
