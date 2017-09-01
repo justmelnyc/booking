@@ -68,6 +68,7 @@ type CalendarPeriod = 'day' | 'week' | 'month';
           <loadingspinner *ngIf="loading"></loadingspinner>
           <div class="wizard">
             <form-wizard [formGroup]="reservationForm" (onStepChanged)="onStepChanged($event)">
+              {{ thurAtFour | date }} {{ friAtTen | date }}
               <wizard-step
                 [isValid]="!reservationForm.controls['service'].untouched"
                 [title]=" data?.service?.type ||'Pick Service'"
@@ -185,8 +186,8 @@ export class BookingComponent implements OnInit {
 
   filtered;
 
-  friday25 = new Date(2017, 7, 25);
-  saturday26 = new Date(2017, 7, 26);
+  thurAtFour = new Date(2017, 8, 7);
+  friAtTen = new Date(2017, 8, 8);
 
   startDate = new Date(2017, 8, 11);
   endDate = new Date(2017, 9, 3);
@@ -198,7 +199,7 @@ export class BookingComponent implements OnInit {
               private slimLoadingBarService: SlimLoadingBarService,
               private store: Store<RootStore.AppState>) {
     this.dayModifier = function (day: Date): string {
-      if (!this.dateIsValid(day) || isSunday(day) || isWithinRange(day, this.friday25, this.saturday26) || isWithinRange(day, this.startDate, this.endDate) ) {
+      if (!this.dateIsValid(day) || isSunday(day) || isWithinRange(day, this.startDate, this.endDate) ) {
         // day.cssClass = 'cal-disabled';
         return 'disabled';
       }
@@ -254,6 +255,10 @@ export class BookingComponent implements OnInit {
             if (isTuesday(this.data.reservationDate) || isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate)) {
               this.bookedTimesNew = _.concat(this.bookedTimes, [10, 11, 12, 13, 14, 15, 16]);
               console.log(this.bookedTimesNew);
+            } else if (isSameDay(this.data.reservationDate, this.thurAtFour)) {
+              this.bookedTimesNew = _.concat(this.bookedTimes, [16]);
+            } else if (isSameDay(this.data.reservationDate, this.friAtTen)) {
+              this.bookedTimesNew = _.concat(this.bookedTimes, [10]);
             } else {
               this.bookedTimesNew = _.concat(this.bookedTimes, []);
               console.log(this.bookedTimesNew);
