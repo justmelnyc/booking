@@ -15,6 +15,7 @@ import {
   isSameMonth,
   isSunday,
   isWeekend,
+  isMonday,
   isTuesday,
   isWednesday,
   isThursday,
@@ -100,7 +101,7 @@ type CalendarPeriod = 'day' | 'week' | 'month';
                 [stepTagline]="'What time would you like'"
                 [stepHeading]="'Sessions are an hour long'"
                 (onNext)="onStep3Next($event)">
-                <time-form formControlName="reservationTime" [times]='times | async' [bookedTimes]='bookedTimesNew'></time-form>
+                <time-form formControlName="reservationTime" [day]='data.reservationDate' [times]='times | async' [bookedTimes]='bookedTimesNew'></time-form>
               </wizard-step>
               <wizard-step
                 [isValid]="this.data && this.data.creditDetail && this.data.creditDetail.valid"
@@ -188,8 +189,10 @@ export class BookingComponent implements OnInit {
   thurAtFour = new Date(2017, 8, 7);
   friAtTen = new Date(2017, 8, 8);
 
+  thisSaturday = new Date(2017, 9, 21);
+
   startDate = new Date(2017, 8, 11);
-  endDate = new Date(2017, 9, 3);
+  endDate = new Date(2017, 9, 10);
 
   constructor(private reservationsActions: ReservationsActions,
               private fb: FormBuilder,
@@ -214,6 +217,7 @@ export class BookingComponent implements OnInit {
 
   onStep1Next(event) {
     console.log(this.data, 'Step1 - Next');
+    console.log(this.bookedTimes);
     // this.stepNumber = 'Step Two';
     // console.log("Hello", swal.isVisible());
     // swal.showLoading();
@@ -226,6 +230,7 @@ export class BookingComponent implements OnInit {
   // onStep2Next(event) {
   //   this.reservationService.getReservationsForDay(this.data.reservationDate).subscribe(reservations => {
   //     this.bookedTimes = reservations.map(reservation => {
+  //       console.log(reservation);
   //       return reservation.reservationTime;
   //     });
   //     // if (this.data.reservationDate) {
@@ -240,6 +245,15 @@ export class BookingComponent implements OnInit {
   //   });
   // }
 
+  // onStep2Next(event) {
+  //   console.log(this.bookedTimes);
+  //   this.reservationService.getReservationsForDay(this.data.reservationDate).subscribe(reservations => {
+  //     this.bookedTimes = reservations.map(reservation => {
+  //       return reservation.reservationTime;
+  //     });
+  //   });
+  // }
+
   onStep2Next(event) {
     console.log('Step2 - Next');
     // this.stepNumber = 'Step Three';
@@ -251,13 +265,11 @@ export class BookingComponent implements OnInit {
         return reservation.reservationTime;
       });
       if (this.data.reservationDate) {
-            if (isTuesday(this.data.reservationDate) || isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate)) {
-              this.bookedTimesNew = _.concat(this.bookedTimes, [10, 11, 12, 13, 14, 15, 16]);
+            if (isMonday(this.data.reservationDate) || isTuesday(this.data.reservationDate) || isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate) || isFriday(this.data.reservationDate)) {
+              this.bookedTimesNew = _.concat(this.bookedTimes, [15, 17]);
               console.log(this.bookedTimesNew);
-            } else if (isSameDay(this.data.reservationDate, this.thurAtFour)) {
-              this.bookedTimesNew = _.concat(this.bookedTimes, [16]);
-            } else if (isSameDay(this.data.reservationDate, this.friAtTen)) {
-              this.bookedTimesNew = _.concat(this.bookedTimes, [10]);
+            } else if (isSameDay(this.data.reservationDate, this.thisSaturday)) {
+              this.bookedTimesNew = _.concat(this.bookedTimes, [11, 12]);
             } else {
               this.bookedTimesNew = _.concat(this.bookedTimes, []);
               console.log(this.bookedTimesNew);
@@ -267,6 +279,7 @@ export class BookingComponent implements OnInit {
   }
 
   onStep3Next(event) {
+    console.log(this.bookedTimes);
     // console.log('Step3 - Next');
   }
 

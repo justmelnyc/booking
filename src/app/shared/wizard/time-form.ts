@@ -1,7 +1,7 @@
 import {Component, EventEmitter, forwardRef, HostBinding, Input, OnInit, Output} from '@angular/core'
 import {FormGroup, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {routeFadeStateTrigger} from "../../app.animations";
-import {isBefore, getHours} from 'date-fns';
+import {isBefore, getHours, isToday} from 'date-fns';
 
 const TIME_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -68,6 +68,7 @@ export class TimeFormComponent implements OnInit {
   @Output() action = new EventEmitter<any>();
   @Input() times;
   @Input() bookedTimes;
+  @Input() day;
   @Input() parent: FormGroup;
   @HostBinding('@routeFadeState') routeAnimation = true;
   // @Input() label;
@@ -92,8 +93,12 @@ export class TimeFormComponent implements OnInit {
     this.value = value || 0;
   }
   isBooked(time) {
+    // const today = isToday(Date.now());
     const now = getHours(Date.now());
-    if (this.bookedTimes.indexOf(time) > -1 || isBefore(time, now)) {
+    // console.log(isToday(this.day));
+    if (this.bookedTimes.indexOf(time) > -1) {
+      return true;
+    } else if (isToday(this.day) && isBefore(time, now)) {
       return true;
     }
     return false;
