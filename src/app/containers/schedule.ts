@@ -58,6 +58,7 @@ import {Subject} from "rxjs/";
     :host {
       display: block;
     }
+    .container, .spacer {}
   `],
   animations: [
     routeFadeStateTrigger

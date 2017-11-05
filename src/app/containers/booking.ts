@@ -48,10 +48,6 @@ class CustomDateFormatter extends CalendarDateFormatter {
     return new Intl.DateTimeFormat(locale, {weekday: 'short'}).format(date); // use short week days
   }
 
-  public timeSlotFormatter({date, locale}: DateFormatterParams): string {
-    return new Intl.DateTimeFormat(locale, {weekday: 'short'}).format(date); // use short week days
-  }
-
 }
 
 
@@ -60,11 +56,10 @@ type CalendarPeriod = 'day' | 'week' | 'month';
 @Component({
   selector: 'booking',
   template: `
-    <hero [background]="'assets/lite-min.jpg'"></hero>
-    <!--<banner></banner>-->
+    <!--<hero [background]="'assets/lite-min.jpg'"></hero>-->
 
     <div class="u-foreground homeContainer-content u-marginAuto u-clearfix u-sizeViewHeightMin100">
-      <div class="container">
+      <div class="container"  style="padding-top: 6em">
         <section>
           <loadingspinner *ngIf="loading"></loadingspinner>
           <div class="wizard">
@@ -125,14 +120,9 @@ type CalendarPeriod = 'day' | 'week' | 'month';
     </div>
   `,
   styles: [`
-    :host {
-      display: block;
-    }
-
-    .wizard {
-      min-height: 750px;
-      height: 100%;
-    }
+    :host {display: block;}
+    .container, .u-foreground, .homeContainer-content, .u-marginAuto, .u-clearfix, .u-sizeViewHeightMin100 {}
+    .wizard {min-height: 750px;height: 100%;}
   `],
   animations: [
     routeFadeStateTrigger
@@ -191,8 +181,8 @@ export class BookingComponent implements OnInit {
 
   thisSaturday = new Date(2017, 9, 21);
 
-  startDate = new Date(2017, 8, 11);
-  endDate = new Date(2017, 9, 10);
+  startDate = new Date(2017, 10, 6);
+  endDate = new Date(2017, 10, 7);
 
   constructor(private reservationsActions: ReservationsActions,
               private fb: FormBuilder,
@@ -201,7 +191,7 @@ export class BookingComponent implements OnInit {
               private slimLoadingBarService: SlimLoadingBarService,
               private store: Store<RootStore.AppState>) {
     this.dayModifier = function (day: Date): string {
-      if (!this.dateIsValid(day) || isSunday(day) || isWithinRange(day, this.startDate, this.endDate) ) {
+      if (!this.dateIsValid(day) || isSunday(day) || isMonday(day) || isTuesday(day) ) {
         // day.cssClass = 'cal-disabled';
         return 'disabled';
       }
@@ -403,6 +393,9 @@ export class BookingComponent implements OnInit {
   }
 
   dateIsValid(date: Date): boolean {
+    return date >= this.minDate && date <= this.maxDate;
+  }
+  dateIsBlocked(date: Date): boolean {
     return date >= this.minDate && date <= this.maxDate;
   }
 
