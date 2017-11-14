@@ -181,6 +181,8 @@ export class BookingComponent implements OnInit {
 
   thisSaturday = new Date(2017, 9, 21);
 
+  thisWednesday = new Date(2017, 10, 15);
+
   startDate = new Date(2017, 10, 6);
   endDate = new Date(2017, 10, 7);
 
@@ -255,7 +257,9 @@ export class BookingComponent implements OnInit {
         return reservation.reservationTime;
       });
       if (this.data.reservationDate) {
-            if (isMonday(this.data.reservationDate) || isTuesday(this.data.reservationDate) || isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate) || isFriday(this.data.reservationDate)) {
+            if (isSameDay(this.data.reservationDate, this.thisWednesday)) {
+              this.bookedTimesNew = _.concat(this.bookedTimes, [14, 15, 17]);
+            } else if (isMonday(this.data.reservationDate) || isTuesday(this.data.reservationDate) || isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate) || isFriday(this.data.reservationDate)) {
               this.bookedTimesNew = _.concat(this.bookedTimes, [15, 17]);
               console.log(this.bookedTimesNew);
             } else if (isSameDay(this.data.reservationDate, this.thisSaturday)) {
