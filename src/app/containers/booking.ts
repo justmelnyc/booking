@@ -177,11 +177,12 @@ export class BookingComponent implements OnInit {
   filtered;
 
   thurAtFour = new Date(2017, 8, 7);
-  friAtTen = new Date(2017, 8, 8);
+  tomorrow = new Date(2017, 10, 16);
 
-  thisSaturday = new Date(2017, 9, 21);
+  thanksGiving = new Date(2017, 10, 23);
 
-  thisWednesday = new Date(2017, 10, 15);
+
+  thisWednesday = new Date(2017, 10, 16);
 
   startDate = new Date(2017, 10, 6);
   endDate = new Date(2017, 10, 7);
@@ -259,11 +260,11 @@ export class BookingComponent implements OnInit {
       if (this.data.reservationDate) {
             if (isSameDay(this.data.reservationDate, this.thisWednesday)) {
               this.bookedTimesNew = _.concat(this.bookedTimes, [14, 15, 17]);
+            } else if (isSameDay(this.data.reservationDate, this.thanksGiving)) {
+              this.bookedTimesNew = _.concat(this.bookedTimes, [10, 11, 12, 13]);
             } else if (isMonday(this.data.reservationDate) || isTuesday(this.data.reservationDate) || isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate) || isFriday(this.data.reservationDate)) {
               this.bookedTimesNew = _.concat(this.bookedTimes, [15, 17]);
               console.log(this.bookedTimesNew);
-            } else if (isSameDay(this.data.reservationDate, this.thisSaturday)) {
-              this.bookedTimesNew = _.concat(this.bookedTimes, [11, 12]);
             } else {
               this.bookedTimesNew = _.concat(this.bookedTimes, []);
               console.log(this.bookedTimesNew);
