@@ -261,7 +261,7 @@ export class BookingComponent implements OnInit {
             if (isSameDay(this.data.reservationDate, this.thisWednesday)) {
               this.bookedTimesNew = _.concat(this.bookedTimes, [14, 15, 17]);
             } else if (isSameDay(this.data.reservationDate, this.thanksGiving)) {
-              this.bookedTimesNew = _.concat(this.bookedTimes, [10, 11, 12, 13]);
+              this.bookedTimesNew = _.concat(this.bookedTimes, [ 15, 16, 17, 18, 19]);
             } else if (isMonday(this.data.reservationDate) || isTuesday(this.data.reservationDate) || isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate) || isFriday(this.data.reservationDate)) {
               this.bookedTimesNew = _.concat(this.bookedTimes, [15, 17]);
               console.log(this.bookedTimesNew);
