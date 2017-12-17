@@ -187,6 +187,8 @@ export class BookingComponent implements OnInit {
   startDate = new Date(2017, 10, 6);
   endDate = new Date(2017, 10, 7);
 
+  twentyFirst = new Date(2017, 11, 21);
+
   constructor(private reservationsActions: ReservationsActions,
               private fb: FormBuilder,
               private _router: Router,
@@ -258,16 +260,13 @@ export class BookingComponent implements OnInit {
         return reservation.reservationTime;
       });
       if (this.data.reservationDate) {
-            if (isSameDay(this.data.reservationDate, this.thisWednesday)) {
-              this.bookedTimesNew = _.concat(this.bookedTimes, [14, 15, 17]);
-            } else if (isSameDay(this.data.reservationDate, this.thanksGiving)) {
-              this.bookedTimesNew = _.concat(this.bookedTimes, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
-            } else if (isMonday(this.data.reservationDate) || isTuesday(this.data.reservationDate) || isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate) || isFriday(this.data.reservationDate)) {
-              this.bookedTimesNew = _.concat(this.bookedTimes, [10, 11, 12, 13, 14, 15, 17, 18, 19]);
-              console.log(this.bookedTimesNew);
+            if (isSameDay(this.data.reservationDate, this.twentyFirst)) {
+              this.bookedTimesNew = _.concat(this.bookedTimes, [9, 10, 11, 15, 16, 17, 18, 19]);
+            } else if (isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate) ) {
+              this.bookedTimesNew = _.concat(this.bookedTimes, [9, 10, 11, 17, 18]);
             } else {
               this.bookedTimesNew = _.concat(this.bookedTimes, []);
-              console.log(this.bookedTimesNew);
+              // console.log(this.bookedTimesNew);
             }
           }
     });
