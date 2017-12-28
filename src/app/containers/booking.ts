@@ -189,7 +189,7 @@ export class BookingComponent implements OnInit {
   startDate = new Date(2017, 10, 6);
   endDate = new Date(2017, 10, 7);
 
-  twentyFirst = new Date(2017, 11, 21);
+  twentyFirst = new Date(2017, 11, 29);
 
   constructor(private reservationsActions: ReservationsActions,
               private fb: FormBuilder,
@@ -263,7 +263,7 @@ export class BookingComponent implements OnInit {
       });
       if (this.data.reservationDate) {
             if (isSameDay(this.data.reservationDate, this.twentyFirst)) {
-              this.bookedTimesNew = _.concat(this.bookedTimes, [9, 10, 11, 15, 16, 17, 18, 19]);
+              this.bookedTimesNew = _.concat(this.bookedTimes, [12]);
             } else if (isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate) ) {
               this.bookedTimesNew = _.concat(this.bookedTimes, [9, 10, 11, 17, 18]);
             } else {
