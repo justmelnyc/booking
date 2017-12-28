@@ -30,6 +30,11 @@ import {Observable} from 'rxjs/Observable';
           </li>
           <li *ngIf="isAdmin()" class="metabar-navItem u-uiTextRegular u-fontSizeSmaller u-inlineBlock u-textColorNormal u-xs-paddingRight12 u-xs-marginRight0">
             <a class="link link--darken u-accentColor--textDarken u-baseColor--link"
+               routerLink="times"
+               routerLinkActive="link--darker">Times</a>
+          </li>
+          <li *ngIf="isAdmin()" class="metabar-navItem u-uiTextRegular u-fontSizeSmaller u-inlineBlock u-textColorNormal u-xs-paddingRight12 u-xs-marginRight0">
+            <a class="link link--darken u-accentColor--textDarken u-baseColor--link"
                routerLink="reservations"
                routerLinkActive="link--darker">Reservations</a>
           </li>

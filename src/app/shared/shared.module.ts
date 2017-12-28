@@ -19,6 +19,7 @@ import {
   ServiceFormComponent,
   ServicesComponent,
   TimeFormComponent,
+  TimeListComponent,
   CreditFormComponent,
   TimeComponent,
   SegmentComponent,
@@ -43,7 +44,9 @@ import {
 } from './popover/index';
 import {ScheduleModule} from '../schedule/schedule.module';
 import { FormWizardModule } from './wizard/index';
-import { CreditCardPipe, ExpireDatePipe } from './directives/index'
+import { CreditCardPipe, ExpireDatePipe } from './directives/index';
+import { TabsComponent } from './tabs/tabs.component';
+import { HoursComponent } from './hours/hours.component'
 
 
 @NgModule({
@@ -94,7 +97,10 @@ import { CreditCardPipe, ExpireDatePipe } from './directives/index'
     ContactFormComponent,
     CreditCardPipe,
     ExpireDatePipe,
-    ServiceModalComponent
+    ServiceModalComponent,
+    TimeListComponent,
+    TabsComponent,
+    HoursComponent
   ],
   exports: [
     ConfirmFormComponent,
@@ -139,7 +145,10 @@ import { CreditCardPipe, ExpireDatePipe } from './directives/index'
     ContactFormComponent,
     CreditCardPipe,
     ExpireDatePipe,
-    ServiceModalComponent
+    ServiceModalComponent,
+    TimeListComponent,
+    TabsComponent,
+    HoursComponent
   ]
 })
 export class SharedModule {

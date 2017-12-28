@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent, BookingComponent, ScheduleComponent, ReservationsComponent, ContactComponent, AboutComponent, UsersComponent, UserDetailComponent,
-  ProfileComponent, MyReservationsComponent, MyMessagesComponent, MyProfileComponent } from "./containers/index";
+  ProfileComponent, MyReservationsComponent, MyMessagesComponent, MyProfileComponent, TimesComponent } from "./containers/index";
 
 import {SharedModule} from "./shared/shared.module";
 import {CommonModule} from "@angular/common";
@@ -21,6 +21,12 @@ const routes: Routes = [
   {
     path: 'schedule',
     component: ScheduleComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['admin'] }
+  },
+  {
+    path: 'times',
+    component: TimesComponent,
     canActivate: [AuthGuard],
     data: { roles: ['admin'] }
   },
@@ -71,8 +77,8 @@ const routes: Routes = [
 @NgModule({
   imports: [ReactiveFormsModule, FormsModule, SharedModule, CommonModule, RouterModule.forRoot(routes)],
   declarations: [HomeComponent, BookingComponent, ScheduleComponent, ReservationsComponent, ContactComponent, AboutComponent, UsersComponent, UserDetailComponent,
-    ProfileComponent, MyReservationsComponent, MyMessagesComponent, MyProfileComponent],
+    ProfileComponent, MyReservationsComponent, MyMessagesComponent, MyProfileComponent, TimesComponent],
   exports: [RouterModule, HomeComponent, BookingComponent, ScheduleComponent, ReservationsComponent, ContactComponent, AboutComponent, UsersComponent, UserDetailComponent,
-    ProfileComponent, MyReservationsComponent, MyMessagesComponent, MyProfileComponent]
+    ProfileComponent, MyReservationsComponent, MyMessagesComponent, MyProfileComponent, TimesComponent]
 })
 export class AppRoutingModule { }

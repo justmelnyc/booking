@@ -29,6 +29,7 @@ export * from './interface/segment';
 
 export * from './users/index';
 export * from './interface/contact-form';
+export * from './time-list'
 
 
 
