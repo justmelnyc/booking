@@ -28,7 +28,8 @@ import {
   subWeeks,
   isSaturday,
   isWithinRange,
-  isDate
+  isDate,
+  isToday
 } from "date-fns";
 import * as RootStore from "../store";
 import {Store} from "@ngrx/store";
@@ -190,6 +191,8 @@ export class BookingComponent implements OnInit {
   endDate = new Date(2017, 10, 7);
 
   twentyFirst = new Date(2017, 11, 29);
+  today29 = new Date(2017, 11, 29);
+
 
   constructor(private reservationsActions: ReservationsActions,
               private fb: FormBuilder,
@@ -263,7 +266,7 @@ export class BookingComponent implements OnInit {
       });
       if (this.data.reservationDate) {
             if (isSameDay(this.data.reservationDate, this.twentyFirst)) {
-              this.bookedTimesNew = _.concat(this.bookedTimes, [12]);
+              this.bookedTimesNew = _.concat(this.bookedTimes, [9, 10, 11, 12, 13, 14, 18, 19]);
             } else if (isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate) ) {
               this.bookedTimesNew = _.concat(this.bookedTimes, [9, 10, 11, 17, 18]);
             } else {
