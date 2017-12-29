@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'hours',
@@ -7,16 +7,15 @@ import { Component, OnInit, Input } from '@angular/core';
             <!--<span class="u-flex1"></span>-->
             <ul class="heading-tabs">
                 <li *ngFor="let time of times; let i = index"
-
-                [ngClass]="{active: checkedOption === i}" class="heading-tabsItem u-inlineBlock">
+                    class="heading-tabsItem u-inlineBlock active">
                     <span class="u-flex1">
                 <span
                  [attr.disabled]=' isBlocked(time.hour)'
                   [ngClass]="{'u-fontWeightMedium': false}"
-                  class="heading-title u-inlineBlock u-fontWeightNormal">
+                  class="heading-title u-inlineBlock u-fontWeightNormal"
+                  (click)='block.emit(time.hour)'>
                 <a
-
-                  [ngClass]="{'u-accentColor': step.isCompleted, red: isBlocked(time.hour) }"
+                  [ngClass]="{'u-accentColor': step.isCompleted, blocked: isBlocked(time.hour) }"
                   class="button button--unstyled is-touched">{{ time.hour | time}}</a>
                </span>
                     </span>
@@ -31,16 +30,20 @@ import { Component, OnInit, Input } from '@angular/core';
   }
     .button {
       border-radius: 5px;
+      color: rgba(0, 0, 0, 0.50);
+      border-color: rgba(0, 0, 0, 0.50);
 
     }
-    .red {
+    .blocked {
      opacity: .5;
+     background-color: rgba(0, 0, 0, 0.10);
     }
   `]
 })
 export class HoursComponent implements OnInit {
   @Input() times;
   @Input() availableTimes;
+  @Output() block = new EventEmitter<number>();
 
     step = {
     isActive: false,

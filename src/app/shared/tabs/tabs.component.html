@@ -12,7 +12,7 @@
         <nav class="u-flex heading heading--borderedTop u-textAlignCenter">
             <!--<span class="u-flex1"></span>-->
             <ul class="heading-tabs">
-                <li [ngClass]="{'is-active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'u-accentColor--textDarken': isCompleted}" class="heading-tabsItem u-inlineBlock">
+                <li (click)="select.emit('monday')" [ngClass]="{'is-active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'u-accentColor--textDarken': isCompleted}" class="heading-tabsItem u-inlineBlock">
                     <span class="u-flex1">
                 <span
                   [ngClass]="{'u-fontWeightMedium': step.isActive}"
@@ -23,7 +23,7 @@
                </span>
                     </span>
                 </li>
-                <li [ngClass]="{'is-active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'u-accentColor--textDarken': isCompleted}" class="heading-tabsItem u-inlineBlock">
+                <li (click)="select.emit('tuesday')" [ngClass]="{'is-active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'u-accentColor--textDarken': isCompleted}" class="heading-tabsItem u-inlineBlock">
                     <span class="u-flex1">
                 <span
                   [ngClass]="{'u-fontWeightMedium': step.isActive}"
@@ -34,7 +34,7 @@
                </span>
                     </span>
                 </li>
-                <li [ngClass]="{'is-active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'u-accentColor--textDarken': isCompleted}" class="heading-tabsItem u-inlineBlock">
+                <li (click)="select.emit('wednesday')" [ngClass]="{'is-active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'u-accentColor--textDarken': isCompleted}" class="heading-tabsItem u-inlineBlock">
                     <span class="u-flex1">
                 <span
                   [ngClass]="{'u-fontWeightMedium': step.isActive}"
@@ -45,7 +45,7 @@
                </span>
                     </span>
                 </li>
-                <li [ngClass]="{'is-active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'u-accentColor--textDarken': isCompleted}" class="heading-tabsItem u-inlineBlock">
+                <li (click)="select.emit('thursday')" [ngClass]="{'is-active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'u-accentColor--textDarken': isCompleted}" class="heading-tabsItem u-inlineBlock">
                     <span class="u-flex1">
                 <span
                   [ngClass]="{'u-fontWeightMedium': step.isActive}"
@@ -56,7 +56,7 @@
                </span>
                     </span>
                 </li>
-                <li [ngClass]="{'is-active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'u-accentColor--textDarken': isCompleted}" class="heading-tabsItem u-inlineBlock">
+                <li (click)="select.emit('friday')" [ngClass]="{'is-active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'u-accentColor--textDarken': isCompleted}" class="heading-tabsItem u-inlineBlock">
                     <span class="u-flex1">
                 <span
                   [ngClass]="{'u-fontWeightMedium': step.isActive}"
@@ -67,7 +67,7 @@
                </span>
                     </span>
                 </li>
-                <li [ngClass]="{'is-active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'u-accentColor--textDarken': isCompleted}" class="heading-tabsItem u-inlineBlock">
+                <li (click)="select.emit('saturday')" [ngClass]="{'is-active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'u-accentColor--textDarken': isCompleted}" class="heading-tabsItem u-inlineBlock">
                     <span class="u-flex1">
                 <span
                   [ngClass]="{'u-fontWeightMedium': step.isActive}"
@@ -78,7 +78,7 @@
                </span>
                     </span>
                 </li>
-                <li [ngClass]="{'is-active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'u-accentColor--textDarken': isCompleted}" class="heading-tabsItem u-inlineBlock">
+                <li (click)="select.emit('sunday')" [ngClass]="{'is-active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'u-accentColor--textDarken': isCompleted}" class="heading-tabsItem u-inlineBlock">
                     <span class="u-flex1">
                 <span
                   [ngClass]="{'u-fontWeightMedium': step.isActive}"
