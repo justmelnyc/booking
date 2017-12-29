@@ -18,7 +18,8 @@ export class ScheduleService {
 
 	constructor(private db: AngularFireDatabase) {  }
 	 updateDay(day) {
-    this.daySource.next(day);
+		this.daySource.next(day);
+		this.getDayTimes(day)
 	}
 
 	  getTimesList(query={}): FirebaseListObservable<any[]> {
@@ -30,7 +31,8 @@ export class ScheduleService {
 
 	  getDayTimes(day: string): FirebaseListObservable<any[]> {
 	  const dayPath =  `${this.basePath}/${day}`;
-	  this.times = this.db.list(dayPath);
+		this.times = this.db.list(dayPath);
+		console.log('set day ran and getsettimes too')
 	  return this.times;
 	}
 

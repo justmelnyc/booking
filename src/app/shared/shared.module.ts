@@ -44,7 +44,7 @@ import {
 } from './popover/index';
 import {ScheduleModule} from '../schedule/schedule.module';
 import { FormWizardModule } from './wizard/index';
-import { CreditCardPipe, ExpireDatePipe } from './directives/index';
+import { CreditCardPipe, ExpireDatePipe, CapitalizePipe } from './directives/index';
 import { TabsComponent } from './tabs/tabs.component';
 import { HoursComponent } from './hours/hours.component'
 
@@ -100,7 +100,8 @@ import { HoursComponent } from './hours/hours.component'
     ServiceModalComponent,
     TimeListComponent,
     TabsComponent,
-    HoursComponent
+    HoursComponent,
+    CapitalizePipe
   ],
   exports: [
     ConfirmFormComponent,
@@ -148,7 +149,8 @@ import { HoursComponent } from './hours/hours.component'
     ServiceModalComponent,
     TimeListComponent,
     TabsComponent,
-    HoursComponent
+    HoursComponent,
+    CapitalizePipe
   ]
 })
 export class SharedModule {

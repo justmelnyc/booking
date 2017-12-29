@@ -12,7 +12,21 @@
         <nav class="u-flex heading heading--borderedTop u-textAlignCenter">
             <!--<span class="u-flex1"></span>-->
             <ul class="heading-tabs">
-                <li (click)="select.emit('monday')" [ngClass]="{'is-active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'u-accentColor--textDarken': isCompleted}" class="heading-tabsItem u-inlineBlock">
+                <li *ngFor="let day of weekdays" (click)="select.emit(day)" [ngClass]="{'is-active': selectedDay === day}" class="heading-tabsItem u-inlineBlock">
+                    <span class="u-flex1">
+                        <span
+                        [ngClass]="{'u-fontWeightMedium': step.isActive}"
+                        class="heading-title u-inlineBlock u-fontWeightNormal">
+                <a
+                  [ngClass]="{'u-accentColor': step.isCompleted}"
+                  class="button button--unstyled is-touched">{{day}}</a>
+               </span>
+                    </span>
+                </li>
+
+
+
+                <!-- <li (click)="select.emit('monday')" [ngClass]="{'is-active': selectedDay === 'monday', 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'u-accentColor--textDarken': isCompleted}" class="heading-tabsItem u-inlineBlock">
                     <span class="u-flex1">
                 <span
                   [ngClass]="{'u-fontWeightMedium': step.isActive}"
@@ -88,7 +102,7 @@
                   class="button button--unstyled is-touched">Sunday</a>
                </span>
                     </span>
-                </li>
+                </li> -->
 
             </ul>
         </nav>

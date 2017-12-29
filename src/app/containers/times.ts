@@ -1,6 +1,6 @@
 import { async } from '@angular/core/testing';
 import { ScheduleService } from './../core/service/schedule';
-import {Component, HostBinding, OnInit} from "@angular/core";
+import {Component, HostBinding, OnInit, OnDestroy} from "@angular/core";
 import {SlimLoadingBarService} from "ng2-slim-loading-bar";
 import {routeFadeStateTrigger} from "../app.animations";
 import {Router} from "@angular/router";
@@ -11,14 +11,17 @@ import { getTime } from 'date-fns';
   selector: 'times',
   template: `
   <div class='container' style="padding-top: 6em">
-  <tabs (select)="setDay($event)">
+  <tabs (select)="setDay($event)"
+  [weekdays]='weekdays'
+  [selectedDay]='selectedDay'>
   <hours
     [times]='times | async'
     [availableTimes]='blockedTimes'
     (block)="scheduleService.blockTime($event)">
   </hours>
   </tabs>
-  <pre> {{ blockedTimes }}</pre>
+  <pre> {{ blockedTimes }} </pre>
+   <pre> {{ scheduleService.selectedDay$ | async }} </pre>
 
   </div>
   `,
@@ -32,14 +35,20 @@ export class TimesComponent implements OnInit {
   times;
   fbTimes;
   blockedTimes;
+  selectedDay;
+  subscription;
+  weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
   constructor(private scheduleService: ScheduleService, private reservationService: ReservationService, private router: Router, private slimLoadingBarService: SlimLoadingBarService) {
   }
 
   ngOnInit() {
     this.slimLoadingBarService.start();
     this.times = this.reservationService.getAllSlots();
-    //  this.fbTimes = this.scheduleService.getDayTimes('monday');
-    // this.AvailableTimes = this.scheduleService.getDayTimes('monday');
+    this.subscription = this.scheduleService.selectedDay$
+       .subscribe(day => {
+         this.selectedDay = day;
+       });
+
     this.slimLoadingBarService.complete();
     console.log(this.fbTimes);
     this.getTimes(this.scheduleService.selectedDay$);
@@ -49,18 +58,23 @@ export class TimesComponent implements OnInit {
   setDay(day): void {
     console.log(day);
     this.scheduleService.updateDay(day);
+    this.getTimes(this.selectedDay);
   }
   onAction() {
     this.router.navigate(['booking']);
   }
 
    getTimes(event) {
-    console.log(event);
-    this.scheduleService.getDayTimes('monday').subscribe(times => {
-       console.log(times);
+    console.log('this right here', event);
+    this.scheduleService.getDayTimes(event.$value).subscribe(times => {
+      //  console.log(times);
       this.blockedTimes = times.map(time => {
         return time.$value;
       });
     });
+  }
+  ngOnDestroy() {
+    // prevent memory leak when component is destroyed
+    this.subscription.unsubscribe();
   }
 }
