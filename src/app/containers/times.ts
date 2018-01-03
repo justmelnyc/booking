@@ -21,6 +21,11 @@ import {Subscription} from 'rxjs/Subscription';
     [availableTimes]='blockedTimes'
     (block)="scheduleService.blockTime($event)">
   </hours>
+  <hours
+    [times]='times | async'
+    [availableTimes]='blockedTimes'
+    (block)="scheduleService.blockTime($event)">
+  </hours>
   </tabs>
   <pre> {{ blockedTimes }} </pre>
    <pre> {{ scheduleService.selectedDay$ | async }} </pre>
@@ -35,6 +40,7 @@ import {Subscription} from 'rxjs/Subscription';
 export class TimesComponent implements OnInit {
   @HostBinding('@routeFadeState') routeAnimation = false;
   times;
+  newTimes;
   fbTimes;
   blockedTimes;
   selectedDay;
@@ -52,7 +58,8 @@ export class TimesComponent implements OnInit {
        .subscribe(day => {
          this.selectedDay = day;
        });
-
+       this.newTimes = this.scheduleService.getTimesList2()
+;
     this.slimLoadingBarService.complete();
     console.log(this.fbTimes);
     this.getTimes(this.selectedDay);

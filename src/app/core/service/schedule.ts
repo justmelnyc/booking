@@ -7,10 +7,12 @@ import * as _ from 'lodash';
 @Injectable()
 export class ScheduleService {
 	availableTimes = [9, 10, 12];
+	newTimes;
 
 	private daySource = new BehaviorSubject<string>('monday');
 
   selectedDay$ = this.daySource.asObservable();
+  private timePath = '/times/monday';
 
   private basePath = '/schedule';
  	times = null; //  list of objects
@@ -23,11 +25,14 @@ export class ScheduleService {
 	}
 
 	  getTimesList(query={}): FirebaseListObservable<any[]> {
-	  this.times = this.db.list(this.basePath, {
-	    query: query
-	  });
+	  this.times = this.db.list(this.basePath);
 	  return this.times;
 	}
+		getTimesList2(query={}): FirebaseObjectObservable<any[]> {
+	  this.newTimes = this.db.object(this.timePath);
+	  return this.newTimes;
+	}
+
 
 	  getDayTimes(day: string): FirebaseListObservable<any[]> {
 	  const dayPath =  `${this.basePath}/${day}`;
@@ -47,14 +52,27 @@ export class ScheduleService {
 
 		// arr = [4, 5, 8];
 
- blockTime(time: number) {
-    const idx = _.indexOf(this.times, time);
-    if (idx >= 0) {
-      this.times.splice(idx, 1);
-    } else {
-      this.times.push(time);
-    }
-  }
+//  blockTime(time: number) {
+//     const idx = _.indexOf(this.times, time);
+//     if (idx >= 0) {
+//       this.times.splice(idx, 1);
+//     } else {
+//       this.times.push(time);
+//     }
+// 	}
+
+
+// 	blockTime(time: number) {
+//   	if (!this.times[time]) {
+//     this.times[time] = true;
+//   }	else {
+//     delete this.times[time];
+//   }
+// }
+
+blockTime(time: number) {
+  this.times[time] = !(this.times[time] || false);
+}
 
 
 	// Return a single observable item
