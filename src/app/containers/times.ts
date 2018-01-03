@@ -6,6 +6,8 @@ import {routeFadeStateTrigger} from "../app.animations";
 import {Router} from "@angular/router";
 import {ReservationService} from "../core/service/res";
 import { getTime } from 'date-fns';
+import {Subscription} from 'rxjs/Subscription';
+
 
 @Component({
   selector: 'times',
@@ -36,7 +38,9 @@ export class TimesComponent implements OnInit {
   fbTimes;
   blockedTimes;
   selectedDay;
-  subscription;
+  day;
+  error;
+  subscription: Subscription;
   weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
   constructor(private scheduleService: ScheduleService, private reservationService: ReservationService, private router: Router, private slimLoadingBarService: SlimLoadingBarService) {
   }
@@ -51,8 +55,9 @@ export class TimesComponent implements OnInit {
 
     this.slimLoadingBarService.complete();
     console.log(this.fbTimes);
-    this.getTimes(this.scheduleService.selectedDay$);
+    this.getTimes(this.selectedDay);
   }
+
 
 
   setDay(day): void {
@@ -66,8 +71,7 @@ export class TimesComponent implements OnInit {
 
    getTimes(event) {
     console.log('this right here', event);
-    this.scheduleService.getDayTimes(event.$value).subscribe(times => {
-      //  console.log(times);
+    this.scheduleService.getDayTimes(event).subscribe(times => {
       this.blockedTimes = times.map(time => {
         return time.$value;
       });
