@@ -175,6 +175,10 @@ export class BookingComponent implements OnInit {
   isCompleted = false;
 
   filtered;
+  dates = [
+new Date(2018, 0, 12),
+new Date(2018, 0, 13),
+new Date(2018, 0, 11)];
 
   thurAtFour = new Date(2017, 8, 7);
   tomorrow = new Date(2017, 10, 16);
@@ -198,7 +202,7 @@ export class BookingComponent implements OnInit {
               private slimLoadingBarService: SlimLoadingBarService,
               private store: Store<RootStore.AppState>) {
     this.dayModifier = function (day: Date): string {
-      if (!this.dateIsValid(day) || isSunday(day) || isMonday(day) || isTuesday(day) || isSameDay(day, this.wedding1) || isSameDay(day, this.wedding2) ) {
+      if (!this.dateIsValid(day) || isSunday(day) || isMonday(day) || isTuesday(day) || isSameDay(day, this.wedding1) || isSameDay(day, this.wedding2) || this.dateBlocked(day)) {
         // day.cssClass = 'cal-disabled';
         return 'disabled';
       }
@@ -210,6 +214,10 @@ export class BookingComponent implements OnInit {
   setDay() {
     // console.log('today is', this.viewDate);
     this.reservationService.updateDay(this.viewDate);
+  }
+
+  dateBlocked(date) {
+    return this.dates.some(d => +d === +date);
   }
 
   onStep1Next(event) {
