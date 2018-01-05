@@ -18,7 +18,9 @@ export class ScheduleService {
  	times = null; //  list of objects
   time = null; //   single object
 
-	constructor(private db: AngularFireDatabase) {  }
+	constructor(private db: AngularFireDatabase) {
+		this.times = this.db.object(this.basePath);
+	 }
 	 updateDay(day) {
 		this.daySource.next(day);
 		this.getDayTimes(day)
@@ -41,45 +43,33 @@ export class ScheduleService {
 	  return this.times;
 	}
 
-		// blockTime(time: number): void {
-		// 	const idx = _.indexOf(this.times, time);
-		// 	if (idx !== -1) {
-		// 			this.times.splice(idx, 1);
-		// 	} else {
-		// 			this.times.push(time);
-		// 	}
-		// }
+// 	block(event, day) {
 
-		// arr = [4, 5, 8];
+// 		// const {$key, $value} = event;
+// 		const key = event.$key;
+// 		delete event.$key;
 
-//  blockTime(time: number) {
-//     const idx = _.indexOf(this.times, time);
-//     if (idx >= 0) {
-//       this.times.splice(idx, 1);
-//     } else {
-//       this.times.push(time);
-//     }
-// 	}
+// 		const dayPath =  `${this.basePath}/${day}`;
+// 		// console.log($key, $value, day);
+// 		this.times.update(key, event );
+//  }
 
+ block(event: any, day): void {
+	 const key = event.$key.toString();
+	 const keyN = event.$key;
+	 delete event.$key;
 
-// 	blockTime(time: number) {
-//   	if (!this.times[time]) {
-//     this.times[time] = true;
-//   }	else {
-//     delete this.times[time];
-//   }
-// }
-
-blockTime(time: number) {
-  this.times[time] = !(this.times[time] || false);
+	 const dayPath =  `${this.basePath}/${day}`;
+	//  console.log(key, day, keyN)
+   this.db.object(dayPath)
+    .update({  key : true });
 }
-
 
 	// Return a single observable item
 	getTime(key: string): FirebaseObjectObservable<any> {
 	  const itemPath =  `${this.basePath}/${key}`;
 	  this.time = this.db.object(itemPath)
-	  return this.time
+	  return this.time;
 	}
 
 	createItem(time: any): void  {
@@ -87,8 +77,8 @@ blockTime(time: number) {
      .catch(error => this.handleError(error))
 	 }
 	 // Update an existing item
-	 updateItem(key: string, value: any): void {
-	   this.times.update(key, value)
+	 updateItem(event): void {
+	   this.times.update(event.key, event.value)
 	     .catch(error => this.handleError(error))
 	 }
 	 // Deletes a single item

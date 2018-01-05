@@ -10,18 +10,21 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
                     class="heading-tabsItem u-inlineBlock active">
                     <span class="u-flex1">
                 <span
-                 [attr.disabled]=' isBlocked(time.hour)'
+                  [attr.disabled]=' isOn(time)'
                   [ngClass]="{'u-fontWeightMedium': false}"
                   class="heading-title u-inlineBlock u-fontWeightNormal"
-                  (click)='block.emit(time.hour)'>
+                  (click)='block.emit(time)'>
                 <a
-                  [ngClass]="{'u-accentColor': step.isCompleted, blocked: isBlocked(time.hour) }"
-                  class="button button--unstyled is-touched">{{ time.hour | time}}</a>
+                  [ngClass]="{'u-accentColor': step.isCompleted, blocked: isOn(time) }"
+                  class="button button--unstyled is-touched">{{ i + 9 | time }}</a>
                </span>
                     </span>
+                    <pre>{{ time.$value}}, {{ time.$key }} </pre>
                 </li>
             </ul>
+
         </nav>
+
   `,
   styles: [`
   .heading-tabsItem {
@@ -53,7 +56,7 @@ export class HoursComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.availableTimes)
+    console.log(this.availableTimes);
   }
   isBlocked(time) {
 
@@ -63,5 +66,12 @@ export class HoursComponent implements OnInit {
     return false;
   }
 
+  isOn(time) {
+    if (time.$value) {
+      return false;
+    }
+    return true;
+
+  }
 
 }

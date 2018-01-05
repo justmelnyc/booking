@@ -16,19 +16,16 @@ import {Subscription} from 'rxjs/Subscription';
   <tabs (select)="setDay($event)"
   [weekdays]='weekdays'
   [selectedDay]='selectedDay'>
+
   <hours
-    [times]='times | async'
+    [times]='blockedTimes'
     [availableTimes]='blockedTimes'
-    (block)="scheduleService.blockTime($event)">
-  </hours>
-  <hours
-    [times]='times | async'
-    [availableTimes]='blockedTimes'
-    (block)="scheduleService.blockTime($event)">
+    (block)="scheduleService.block($event, selectedDay)">
   </hours>
   </tabs>
   <pre> {{ blockedTimes }} </pre>
    <pre> {{ scheduleService.selectedDay$ | async }} </pre>
+   <pre> {{ blockedTimes | json }} </pre>
 
   </div>
   `,
@@ -79,9 +76,7 @@ export class TimesComponent implements OnInit {
    getTimes(event) {
     console.log('this right here', event);
     this.scheduleService.getDayTimes(event).subscribe(times => {
-      this.blockedTimes = times.map(time => {
-        return time.$value;
-      });
+      this.blockedTimes = times;
     });
   }
   ngOnDestroy() {
