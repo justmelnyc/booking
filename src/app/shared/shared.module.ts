@@ -19,6 +19,8 @@ import {
   ServiceFormComponent,
   ServicesComponent,
   TimeFormComponent,
+  HourFormComponent,
+  TimeListComponent,
   CreditFormComponent,
   TimeComponent,
   SegmentComponent,
@@ -43,7 +45,11 @@ import {
 } from './popover/index';
 import {ScheduleModule} from '../schedule/schedule.module';
 import { FormWizardModule } from './wizard/index';
-import { CreditCardPipe, ExpireDatePipe } from './directives/index'
+import { CreditCardPipe, ExpireDatePipe, CapitalizePipe } from './directives/index';
+import { TabsComponent } from './tabs/tabs.component';
+import { HoursComponent } from './hours/hours.component';
+import { NgDatepickerModule } from './datepicker/datepicker.module'
+
 
 
 @NgModule({
@@ -54,6 +60,7 @@ import { CreditCardPipe, ExpireDatePipe } from './directives/index'
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
+    NgDatepickerModule,
     FormWizardModule.forRoot(),
     ScheduleModule.forRoot(),
   ],
@@ -94,7 +101,13 @@ import { CreditCardPipe, ExpireDatePipe } from './directives/index'
     ContactFormComponent,
     CreditCardPipe,
     ExpireDatePipe,
-    ServiceModalComponent
+    ServiceModalComponent,
+    TimeListComponent,
+    TabsComponent,
+    HoursComponent,
+    CapitalizePipe,
+    HourFormComponent
+
   ],
   exports: [
     ConfirmFormComponent,
@@ -139,7 +152,13 @@ import { CreditCardPipe, ExpireDatePipe } from './directives/index'
     ContactFormComponent,
     CreditCardPipe,
     ExpireDatePipe,
-    ServiceModalComponent
+    ServiceModalComponent,
+    TimeListComponent,
+    TabsComponent,
+    HoursComponent,
+    CapitalizePipe,
+    HourFormComponent,
+    NgDatepickerModule
   ]
 })
 export class SharedModule {

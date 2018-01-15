@@ -16,7 +16,7 @@ import {Router} from '@angular/router'
 
       <div class="surface" style="display: block; visibility: visible;">
         <div class="screenContent surface-content">
-          <navigator [user]='user$ | async'
+         <navigator [user]='user$ | async'
                      [profile]='profile$ | async'
                      (open)='authModal()'
                      (menu)='openMenu()'
@@ -35,11 +35,11 @@ import {Router} from '@angular/router'
 
 
 
-              
-              
-              
-              
-              
+
+
+
+
+
               <p class="ActionBlock__text___1OjzK" >Claim you spot now!</p>
               <span class="ActionBlock__link___eVZiK typography__link-underline___2RjK1">Reserve</span>
             </a>
@@ -53,17 +53,17 @@ import {Router} from '@angular/router'
               <p class="ActionBlock__text___1OjzK">Call or Text me</p>
               <span class="ActionBlock__link___eVZiK typography__link-underline___2RjK1" data-reactid="624">+1 (646) 535-1334</span>
             </a>
-          </div>
-          
-          
+          </div> 
+
+
           <placeholder></placeholder>
           <popover-template></popover-template>
-          
+
         </div>
       </div>
     </div>
-    <ng2-slim-loading-bar [color]="'pink'" [height]="'2px'"></ng2-slim-loading-bar>
-    <foot></foot>
+   <ng2-slim-loading-bar [color]="'pink'" [height]="'2px'"></ng2-slim-loading-bar>
+    <foot></foot> 
   `,
   styles: [`
     .ContactOptions__container___3r-1R {
@@ -82,7 +82,7 @@ import {Router} from '@angular/router'
     .ActionBlock__container___3YbY1:not(:last-child) {
       border-right: 1px solid #d9d9d9;
     }
-    
+
     svg:not(:root) {
       overflow: hidden;
     }

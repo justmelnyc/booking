@@ -29,7 +29,7 @@ import { AuthGuard } from './app.service';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   declarations: [
     AppComponent

@@ -217,7 +217,7 @@ export class ReservationService {
 
   updateStatus(reservation, newStatus) {
     reservation.status = newStatus;
-    this.db.database.ref(`reservations/${reservation.$key}/status`).set(newStatus);
+    // this.db.database.ref(`reservations/${reservation.$key}/status`).set(newStatus);
   }
 
   kill(id) {
