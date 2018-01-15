@@ -43,7 +43,7 @@ const TIME_VALUE_ACCESSOR = {
   </g>
               </svg>
             </div>
-              
+
             </span>
               </div>
               <div class="estimate-project__checkbox__text">
@@ -71,10 +71,8 @@ export class TimeFormComponent implements OnInit {
   @Input() day;
   @Input() parent: FormGroup;
   @HostBinding('@routeFadeState') routeAnimation = true;
-  // @Input() label;
-  // @Input() tag;
-  // checkedOption;
   value;
+  times2;
   onModelChange: Function = (_: any) => {
   }
 
@@ -122,4 +120,5 @@ export class TimeFormComponent implements OnInit {
     console.log('wow', this.times);
 
   }
+
 }

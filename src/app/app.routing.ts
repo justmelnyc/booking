@@ -4,6 +4,7 @@ import { HomeComponent, BookingComponent, ScheduleComponent, ReservationsCompone
   ProfileComponent, MyReservationsComponent, MyMessagesComponent, MyProfileComponent, TimesComponent } from "./containers/index";
 
 import {SharedModule} from "./shared/shared.module";
+
 import {CommonModule} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AuthGuard } from './app.service'

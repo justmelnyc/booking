@@ -28,8 +28,9 @@ import {
   subWeeks,
   isSaturday,
   isWithinRange,
-  isDate
-} from "date-fns";
+  isDate,
+isBefore, getHours, isToday} from 'date-fns';
+
 import * as RootStore from "../store";
 import {Store} from "@ngrx/store";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -40,6 +41,7 @@ import {routeFadeStateTrigger} from "../app.animations";
 // import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
+import { ScheduleService } from "app/core/service";
 // declare swal: any;
 declare var swal:any;
 class CustomDateFormatter extends CalendarDateFormatter {
@@ -96,7 +98,8 @@ type CalendarPeriod = 'day' | 'week' | 'month';
                 [stepTagline]="'What time would you like'"
                 [stepHeading]="'Sessions are an hour long'"
                 (onNext)="onStep3Next($event)">
-                <time-form formControlName="reservationTime" [day]='data.reservationDate' [times]='times | async' [bookedTimes]='bookedTimesNew'></time-form>
+                <hour-form formControlName="reservationTime" [day]='data.reservationDate' [times]='times'></hour-form>
+
               </wizard-step>
               <wizard-step
                 [isValid]="this.data && this.data.creditDetail && this.data.creditDetail.valid"
@@ -116,6 +119,7 @@ type CalendarPeriod = 'day' | 'week' | 'month';
             </form-wizard>
           </div>
         </section>
+
       </div>
     </div>
   `,
@@ -148,18 +152,17 @@ export class BookingComponent implements OnInit {
 
   reservationDay;
   selectedDay;
-  step2: any = {
+  step2 = {
     showNext: true,
     showPrev: true
   };
 
   loading = false;
   times;
-  bookedTimes = [];
-
-  bookedTimesNew = [];
+  bookedTimes;
 
   user;
+
   data: any = {};
 
   minDate: Date = subDays(new Date(), 1);
@@ -173,36 +176,20 @@ export class BookingComponent implements OnInit {
   nextBtnDisabled = false;
 
   isCompleted = false;
+  subscription;
 
   filtered;
-  dates = [
-new Date(2018, 0, 12),
-new Date(2018, 0, 13),
-new Date(2018, 0, 11)];
-
-  thurAtFour = new Date(2017, 8, 7);
-  tomorrow = new Date(2017, 10, 16);
-
-  wedding1 = new Date(2018, 1, 3);
-  wedding2 = new Date(2018, 1, 4);
-
-
-
-  thisWednesday = new Date(2017, 10, 16);
-
-  startDate = new Date(2017, 10, 6);
-  endDate = new Date(2017, 10, 7);
-
-  twentyFirst = new Date(2017, 11, 21);
+  dates = [];
 
   constructor(private reservationsActions: ReservationsActions,
               private fb: FormBuilder,
               private _router: Router,
               private reservationService: ReservationService,
               private slimLoadingBarService: SlimLoadingBarService,
-              private store: Store<RootStore.AppState>) {
+              private store: Store<RootStore.AppState>,
+              private scheduleService: ScheduleService) {
     this.dayModifier = function (day: Date): string {
-      if (!this.dateIsValid(day) || isSunday(day) || isMonday(day) || isTuesday(day) || isSameDay(day, this.wedding1) || isSameDay(day, this.wedding2) || this.dateBlocked(day)) {
+      if ( !this.dateIsValid(day) || isSunday(day) || isMonday(day) || isTuesday(day) || this.dateBlocked(day)) {
         // day.cssClass = 'cal-disabled';
         return 'disabled';
       }
@@ -212,7 +199,6 @@ new Date(2018, 0, 11)];
   }
 
   setDay() {
-    // console.log('today is', this.viewDate);
     this.reservationService.updateDay(this.viewDate);
   }
 
@@ -220,75 +206,61 @@ new Date(2018, 0, 11)];
     return this.dates.some(d => +d === +date);
   }
 
-  onStep1Next(event) {
-    console.log(this.data, 'Step1 - Next');
-    console.log(this.bookedTimes);
-    // this.stepNumber = 'Step Two';
-    // console.log("Hello", swal.isVisible());
-    // swal.showLoading();
-    // if(swal.isVisible()) { // instant regret
-    //  swal.close();
-    // }
-    // sweetAlert.swal.showLoading();
+  getTimes(event, booked) {
+    // console.log(event);
+    this.scheduleService.getDayTimes(event).subscribe(times => {
+
+      this.times = times;
+      const took = this.bookedTimes.map(time => {
+        return time - 9;
+      });
+
+      let booked = took.map(t => parseInt(t));
+
+    // let object = { 9: true, 10: true, 11: true, 12: true, 13: true, 14: true, 15: true, 16: true, 17: true, 18: true, 19: true };
+      booked.forEach((val) => {
+        if (this.times.hasOwnProperty(val)) {
+          this.times[val] = false;
+        }
+  });
+
+
+    });
+
   }
 
-  // onStep2Next(event) {
-  //   this.reservationService.getReservationsForDay(this.data.reservationDate).subscribe(reservations => {
-  //     this.bookedTimes = reservations.map(reservation => {
-  //       console.log(reservation);
-  //       return reservation.reservationTime;
-  //     });
-  //     // if (this.data.reservationDate) {
-  //     //   if (isTuesday(this.data.reservationDate) || isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate)) {
-  //     //     this.bookedTimesNew = _.concat(this.bookedTimes, [10, 11, 12, 13, 14, 15, 16]);
-  //     //     console.log(this.bookedTimesNew);
-  //     //   } else {
-  //     //     this.bookedTimesNew = _.concat(this.bookedTimes, []);
-  //     //     console.log(this.bookedTimesNew);
-  //     //   }
-  //     // }
-  //   });
-  // }
+  isBooked(time) {
+    const now = getHours(Date.now());
+    if (this.times.indexOf(time) > -1) {
+      console.log(true);
+      return true;
+    }
 
-  // onStep2Next(event) {
-  //   console.log(this.bookedTimes);
-  //   this.reservationService.getReservationsForDay(this.data.reservationDate).subscribe(reservations => {
-  //     this.bookedTimes = reservations.map(reservation => {
-  //       return reservation.reservationTime;
-  //     });
-  //   });
-  // }
+    return false;
+  }
+
+  onStep1Next(event) {
+
+  }
 
   onStep2Next(event) {
-    console.log('Step2 - Next');
-    // this.stepNumber = 'Step Three';
-    // This is after selecting day
+    const date = new Date(this.data.reservationDate).toLocaleString('en-us', {  weekday: 'long' }).toLowerCase();
+
     this.reservationService.getReservationsForDay(this.data.reservationDate).subscribe(reservations => {
 
       this.bookedTimes = reservations.map(reservation => {
-        // console.log(reservation);
         return reservation.reservationTime;
       });
-      if (this.data.reservationDate) {
-            if (isSameDay(this.data.reservationDate, this.twentyFirst)) {
-              this.bookedTimesNew = _.concat(this.bookedTimes, [9, 10, 11, 15, 16, 17, 18, 19]);
-            } else if (isWednesday(this.data.reservationDate) || isThursday(this.data.reservationDate) ) {
-              this.bookedTimesNew = _.concat(this.bookedTimes, [9, 10, 11, 17, 18]);
-            } else {
-              this.bookedTimesNew = _.concat(this.bookedTimes, []);
-              // console.log(this.bookedTimesNew);
-            }
-          }
+
+      this.getTimes(date, this.bookedTimes);
     });
   }
 
   onStep3Next(event) {
     console.log(this.bookedTimes);
-    // console.log('Step3 - Next');
   }
 
   onStep4Next(event) {
-    // console.log('Step4 - Next');
   }
   onComplete(event) {
     this.slimLoadingBarService.start();
@@ -300,8 +272,6 @@ new Date(2018, 0, 11)];
       cvc: this.reservationForm.value['creditDetail'].cvc
     }, (status: number, response: any) => {
       if (status === 200) {
-        console.log(`Success! Card token ${response.card.id}.`);
-        console.log('card response', response);
 
         _this.reservationService.bookUserReservation(_this.reservationForm.value, response.id, _this.data.service.price )
           .subscribe(
@@ -314,8 +284,7 @@ new Date(2018, 0, 11)];
               _this._router.navigate(['/']);
             },
             err => {
-              // this.isCompleted = true;
-              console.log(`error creating reservation ${err}`);
+
               _this.loading = false;
 
               swal('Oops...', err.message || err._body, 'error');
@@ -323,9 +292,7 @@ new Date(2018, 0, 11)];
               _this.slimLoadingBarService.complete();
             }
           );
-        // this.save(this.reservationForm);
       } else {
-        console.log("ERROR", response.error);
         _this.loading = false;
         swal('Oops...', response.error.message, 'error');
         _this.slimLoadingBarService.complete();
@@ -337,23 +304,28 @@ new Date(2018, 0, 11)];
     this.step.stepTitle = step.stepTitle;
     this.step.stepTagline = step.stepTagline;
     this.step.stepHeading = step.stepHeading;
-    console.log('Changed to ' + step.title);
   }
 
   ngOnInit() {
-    // this.store.dispatch(this.reservationsActions.loadReservations());
     this.slimLoadingBarService.start();
-    this.times = this.reservationService.getAllSlots();
+
+    this.subscription = this.scheduleService.selectedDay$
+    .subscribe(day => {
+      this.selectedDay = day;
+    });
     this.filtered = this.getThisDay(this.viewDate);
-    // console.log('filtered is', this.filtered);
-    console.log('times', this.times);
+
 
     this.user = this.store.select(state => state.authState.currentUser);
 
 
     this.reservationService.loadReservations();
+    this.scheduleService.getBlackList().subscribe(dates => {
 
-    // this.slots$ = this.reservationService.getSlotsAvailable();
+      this.dates = dates.map(date => {
+        return new Date(date.$value);
+      });
+    });
 
     this.reservations$ = this.store.select(state => state.reservationState.reservations);
 
@@ -382,16 +354,10 @@ new Date(2018, 0, 11)];
   }
 
   dayClicked(day: Date): void {
-    // if (this.selectedDay) {
-    //  delete this.selectedDay.cssClass;
-    // }
-    // this.setDay();
-    // day.cssClass = 'cal-day-selected';
-    // this.selectedDay = day;
+
     this.viewDate = day;
     this.reservationDay = day; // this.selectedDay;
-    console.log("hala day", day);
-    // console.log(this.selectedDay, this.reservationDay)
+
   }
 
   increment(): void {

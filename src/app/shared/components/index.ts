@@ -16,6 +16,7 @@ export * from './breadcrumbs';
 export * from './interface/action';
 export * from '../wizard/service-form';
 export * from '../wizard/time-form';
+export * from '../wizard/hour-form';
 export * from '../wizard/credit-form';
 export * from './time';
 export * from './homepage/index';
